@@ -204,6 +204,35 @@
         </widget>
        </item>
        <item>
+        <widget class="Line" name="line_7">
+         <property name="styleSheet">
+          <string notr="true">/* Line style */
+
+  /* Set the width of the line */
+  width: 20px;
+
+  /* Set the height of the line */
+  height: 5px;
+
+  /* Set the background color of the line */
+  background-color: #3a3b3c;
+
+  /* Set the border of the line */
+  border: 10px;
+
+  /* Set the border radius of the line */
+  border-radius:5px;
+
+
+
+</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -231,7 +260,9 @@
   height: 5px;
 
   /* Set the background color of the line */
-  background-color: white;
+  background-color: #3a3b3c;
+
+   opacity: 20%;
 
   /* Set the border of the line */
   border: 10px;
@@ -719,7 +750,7 @@ QCheckBox::indicator::checked {
   height: 5px;
 
   /* Set the background color of the line */
-  background-color: white;
+  background-color: #3a3b3c;
 
   /* Set the border of the line */
   border: 10px;
@@ -788,7 +819,7 @@ QCheckBox::indicator::checked {
   height: 5px;
 
   /* Set the background color of the line */
-  background-color: white;
+  background-color: #3a3b3c;
 
   /* Set the border of the line */
   border: 10px;
@@ -1224,7 +1255,7 @@ color:#0d0d0d;</string>
   height: 5px;
 
   /* Set the background color of the line */
-  background-color: white;
+  background-color:#3a3b3c;
 
   /* Set the border of the line */
   border: 10px;
@@ -1385,6 +1416,35 @@ color: #fff;</string>
           </spacer>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="Line" name="line_5">
+         <property name="styleSheet">
+          <string notr="true">/* Line style */
+
+  /* Set the width of the line */
+  width: 20px;
+
+  /* Set the height of the line */
+  height: 5px;
+
+  /* Set the background color of the line */
+  background-color: #3a3b3c;
+
+  /* Set the border of the line */
+  border: 10px;
+
+  /* Set the border radius of the line */
+  border-radius:5px;
+
+
+
+</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_5">
@@ -1548,6 +1608,35 @@ color: #fff;</string>
            <width>25</width>
            <height>25</height>
           </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="Line" name="line_6">
+         <property name="styleSheet">
+          <string notr="true">/* Line style */
+
+  /* Set the width of the line */
+  width: 20px;
+
+  /* Set the height of the line */
+  height: 5px;
+
+  /* Set the background color of the line */
+  background-color: #3a3b3c;
+
+  /* Set the border of the line */
+  border: 10px;
+
+  /* Set the border radius of the line */
+  border-radius:5px;
+
+
+
+</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
@@ -1728,6 +1817,7 @@ color: #fff;</string>
 QSlider {
     background-color: transparent;
     height: 10px; /* Set the height of the track */
+
 }
 
 /* Style for the groove (track) */

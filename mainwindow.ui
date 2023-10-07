@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>RealTimeMontoring</class>
+ <widget class="QMainWindow" name="RealTimeMontoring">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>842</width>
-    <height>571</height>
+    <width>1308</width>
+    <height>826</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Adobe Gothic Std B</family>
+    <pointsize>16</pointsize>
+    <bold>true</bold>
+   </font>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #242526;</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,5,1">
+   <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0,5,0,1">
     <property name="leftMargin">
      <number>9</number>
     </property>
     <item>
-     <widget class="QWidget" name="" native="true">
+     <widget class="QWidget" name="rightwidget" native="true">
       <layout class="QVBoxLayout" name="verticalLayout">
        <property name="leftMargin">
         <number>5</number>
@@ -32,15 +42,164 @@
        </property>
        <item>
         <widget class="QPushButton" name="pushButton">
+         <property name="font">
+          <font>
+           <family>-apple-system</family>
+           <pointsize>14</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
+  font-size: 100%;
+  height: 44px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 10px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  touch-action: manipulation;
+  width: 100%;
+
+</string>
+         </property>
          <property name="text">
-          <string>Import Signal</string>
+          <string>Open File</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resourrces.qrc">
+           <normaloff>:/Icons/Icons/upload-.svg</normaloff>:/Icons/Icons/upload-.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_2">
+         <property name="font">
+          <font>
+           <family>-apple-system</family>
+           <pointsize>-1</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
+  font-size: 17px;
+  height: 44px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 10px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+
+</string>
+         </property>
          <property name="text">
           <string>PDF Report</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resourrces.qrc">
+           <normaloff>:/Icons/Icons/book-2-svgrepo-com.svg</normaloff>:/Icons/Icons/book-2-svgrepo-com.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_20">
+         <property name="font">
+          <font>
+           <family>-apple-system</family>
+           <pointsize>-1</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
+  font-size: 17px;
+  height: 44px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 10px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+
+</string>
+         </property>
+         <property name="text">
+          <string>Save</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resourrces.qrc">
+           <normaloff>:/Icons/Icons/save.png</normaloff>:/Icons/Icons/save.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -61,7 +220,36 @@
      </widget>
     </item>
     <item>
-     <widget class="QWidget" name="" native="true">
+     <widget class="Line" name="line_3">
+      <property name="styleSheet">
+       <string notr="true">/* Line style */
+
+  /* Set the width of the line */
+  width: 20px;
+
+  /* Set the height of the line */
+  height: 5px;
+
+  /* Set the background color of the line */
+  background-color: white;
+
+  /* Set the border of the line */
+  border: 10px;
+
+  /* Set the border radius of the line */
+  border-radius:2px;
+
+
+
+</string>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="centerwidget" native="true">
       <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0,0,0">
        <property name="spacing">
         <number>14</number>
@@ -70,18 +258,23 @@
         <number>10</number>
        </property>
        <property name="topMargin">
-        <number>37</number>
+        <number>10</number>
        </property>
        <property name="rightMargin">
         <number>10</number>
        </property>
        <property name="bottomMargin">
-        <number>2</number>
+        <number>5</number>
        </property>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_7">
          <item>
           <widget class="QLabel" name="label_13">
+           <property name="styleSheet">
+            <string notr="true">font-family: 'Gabarito', cursive;
+font-size: 20px;
+color: #fff;</string>
+           </property>
            <property name="text">
             <string>Graph 1</string>
            </property>
@@ -91,6 +284,32 @@
           <layout class="QHBoxLayout" name="horizontalLayout_8">
            <item>
             <widget class="QSlider" name="verticalSlider_3">
+             <property name="styleSheet">
+              <string notr="true">/* Style for the QSlider (Vertical) */
+QSlider::groove:vertical {
+    background: #fff; /* Color of the track */
+    border: 1px solid #999; /* Border of the track */
+    width: 10px; /* Set the width of the track */
+    border-radius: 5px; /* Round the corners of the track */
+}
+
+/* Style for the slider handle (thumb) on a vertical slider */
+QSlider::handle:vertical {
+    background: #FF4742; /* Color of the handle */
+    border: 1px solid; /* Border of the handle */
+    width: 30px; /* Width of the handle */
+    height: 20px; /* Height of the handle */
+    margin: 0 -5px; /* Negative margin to center the handle horizontally */
+    border-radius: 10px; /* Round the corners of the handle */
+}
+
+/* Style for the slider handle when pressed on a vertical slider */
+QSlider::handle:vertical:pressed {
+    background: #FF4742; /* Color of the handle when pressed */
+    border: 1px solid #3498db; /* Border of the handle when pressed */
+}
+</string>
+             </property>
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>
@@ -103,13 +322,47 @@
          </item>
          <item>
           <widget class="QSlider" name="horizontalSlider_5">
+           <property name="styleSheet">
+            <string notr="true">/* Style for the QSlider */
+
+/* Background of the slider track */
+QSlider {
+    background-color: transparent;
+    height: 10px; /* Set the height of the track */
+}
+
+/* Style for the groove (track) */
+QSlider::groove {
+    background: #fff; /* Color of the track */
+    border: 1px solid #999; /* Border of the track */
+    height: 10px; /* Set the height of the track */
+    border-radius: 5px; /* Round the corners of the track */
+}
+
+/* Style for the slider handle (thumb) */
+QSlider::handle {
+    background: #FF4742; /* Color of the handle */
+    border: 1px solid ; /* Border of the handle */
+    width: 20px; /* Width of the handle */
+    height: 30px; /* Height of the handle */
+    margin: -5px 0; /* Negative margin to center the handle vertically */
+    border-radius: 10px; /* Round the corners of the handle */
+}
+
+/* Style for the slider handle when pressed */
+QSlider::handle:pressed {
+    background: #FF4742; /* Color of the handle when pressed */
+    border: 1px solid #3498db; /* Border of the handle when pressed */
+}
+</string>
+           </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="0,0,0,0,0">
+          <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="0,0,0,0,0,0">
            <property name="spacing">
             <number>20</number>
            </property>
@@ -120,32 +373,294 @@
              </property>
              <item>
               <widget class="QLabel" name="label_14">
+               <property name="font">
+                <font>
+                 <family>Gabarito</family>
+                 <pointsize>-1</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font-family: 'Gabarito', cursive;
+font-size: 20px;
+color: #fff;</string>
+               </property>
                <property name="text">
                 <string>Channels</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBox_5"/>
+              <widget class="QComboBox" name="QComboBox">
+               <property name="styleSheet">
+                <string notr="true">/* QComboBox style */
+
+.QComboBox {
+  /* Set the width of the combo box */
+  width: 100px;
+
+  /* Set the background color of the combo box */
+  background-color: #f8f9fa;
+
+  /* Set the border of the combo box */
+  border: 1px solid #e6e6e6;
+
+  /* Set the border radius of the combo box */
+  border-radius: 5px;
+
+  /* Set the padding of the combo box */
+  padding: 5px;
+
+  /* Set the cursor style of the combo box */
+  cursor: pointer;
+}
+
+.QComboBox::down-arrow {
+  /* Set the width and height of the down arrow */
+  width: 15px;
+  height: 15px;
+
+  /* Set the background color of the down arrow */
+  background-color: #ccc;
+
+  /* Set the border radius of the down arrow */
+  border-radius: 5px;
+
+  /* Set the position of the down arrow */
+  position: absolute;
+  right: -10px;
+  bottom: 5px;
+
+  /* Set the cursor style of the down arrow */
+  cursor: pointer;
+}
+
+.QComboBox::down-arrow:hover {
+  /* Set the background color of the down arrow when hovering */
+  background-color: #aaa;
+}
+
+.QComboBox::drop-down {
+  /* Set the width of the drop-down */
+  width: 70px;
+
+  /* Set the background color of the drop-down */
+  background-color: white;
+
+  /* Set the border of the drop-down */
+  border: 1px solid #e6e6e6;
+
+  /* Set the border radius of the drop-down */
+  border-radius: 5px;
+
+  /* Set the padding of the drop-down */
+  padding: 5px;
+
+  /* Set the cursor style of the drop-down */
+  cursor: pointer;
+}
+
+.QComboBox::item {
+  /* Set the height of the combo box items */
+  height: 20px;
+
+  /* Set the padding of the combo box items */
+  padding: 5px;
+
+  /* Set the cursor style of the combo box items */
+  cursor: pointer;
+}
+
+.QComboBox::item:selected {
+  /* Set the background color of the selected combo box item */
+  background-color: #e6e6e6;
+}
+
+.QComboBox {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
            <item>
             <widget class="QPushButton" name="pushButton_3">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>-apple-system</family>
+               <pointsize>14</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">appearance: button;
+backface-visibility: hidden;
+background-color: #405cf5;
+border-radius: 6px;
+border-width: 0;
+box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+box-sizing: border-box;
+color: #fff;
+cursor: pointer;
+font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
+font-size: 100%;
+height: 30px;
+line-height: 1.15;
+outline: none;
+overflow: hidden;
+padding: 3 10px;
+position: relative;
+text-align: center;
+text-transform: none;
+transform: translateZ(0);
+transition: all .2s,box-shadow .08s ease-in;
+user-select: none;
+-webkit-user-select: none;
+touch-action: manipulation;
+width: 100%; /* Reduced width to 200 pixels */
+</string>
+             </property>
              <property name="text">
               <string>Delete</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resourrces.qrc">
+               <normaloff>:/Icons/Icons/delete-svgrepo-com.svg</normaloff>:/Icons/Icons/delete-svgrepo-com.svg</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+             <property name="autoDefault">
+              <bool>false</bool>
+             </property>
+             <property name="flat">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="pushButton_9">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>-apple-system</family>
+               <pointsize>14</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">appearance: button;
+backface-visibility: hidden;
+background-color: #405cf5;
+border-radius: 6px;
+border-width: 0;
+box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+box-sizing: border-box;
+color: #fff;
+cursor: pointer;
+font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
+font-size: 100%;
+height: 30px;
+line-height: 1.15;
+margin: 0 0 0;
+outline: none;
+overflow: hidden;
+padding: 3 8px;
+position: relative;
+text-align: center;
+text-transform: none;
+transform: translateZ(0);
+transition: all .2s,box-shadow .08s ease-in;
+user-select: none;
+-webkit-user-select: none;
+touch-action: manipulation;
+width: 100%; /* Reduced width to 200 pixels */
+</string>
+             </property>
              <property name="text">
-              <string>Pick a Color</string>
+              <string> Color</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resourrces.qrc">
+               <normaloff>:/Icons/Icons/color-palette-svgrepo-com.svg</normaloff>:/Icons/Icons/color-palette-svgrepo-com.svg</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>22</width>
+               <height>22</height>
+              </size>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="checkBox_4">
+            <widget class="QCheckBox" name="checktoggle">
+             <property name="styleSheet">
+              <string notr="true">
+/* Hide the default checkbox */
+QCheckBox::indicator {
+	font-family: 'Gabarito', cursive;
+    width: 20px;
+    height: 20px;
+    background-color: #fff; /* Background color of the checkbox */
+    border: 2px solid #3498db; /* Border color of the checkbox */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Define the checkbox color when checked */
+QCheckBox::indicator:checked {
+    background-color: #2ecc71; /* Checkbox color when checked */
+    border-color: #27ae60; /* Border color when checked */
+}
+
+/* Define the checkbox hover effect */
+QCheckBox::indicator:hover {
+    background-color: #3498db; /* Hover color */
+}
+
+/* Define the checkbox text color */
+QCheckBox {
+color: #fff;
+}
+
+/* Define the spacing between the checkbox and label */
+QCheckBox::indicator::unchecked,
+QCheckBox::indicator::checked {
+    spacing: 10px;
+}
+</string>
+             </property>
              <property name="text">
               <string>Visability</string>
              </property>
@@ -153,10 +668,38 @@
            </item>
            <item>
             <widget class="QLineEdit" name="lineEdit_4">
+             <property name="styleSheet">
+              <string notr="true">  position: relative;
+  display: inline-block;
+  height: 32px;
+  width: 240px;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  border: none;
+  border-radius: 10px;
+  color:#0d0d0d;</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
              <property name="placeholderText">
               <string>Add Label</string>
              </property>
             </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_11">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </item>
@@ -165,17 +708,33 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
-          <spacer name="horizontalSpacer_3">
+          <widget class="Line" name="line">
+           <property name="styleSheet">
+            <string notr="true">/* Line style */
+
+  /* Set the width of the line */
+  width: 20px;
+
+  /* Set the height of the line */
+  height: 5px;
+
+  /* Set the background color of the line */
+  background-color: white;
+
+  /* Set the border of the line */
+  border: 10px;
+
+  /* Set the border radius of the line */
+  border-radius:5px;
+
+
+
+</string>
+           </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
+          </widget>
          </item>
          <item>
           <widget class="QPushButton" name="pushButton_7">
@@ -183,25 +742,68 @@
             <bool>true</bool>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color:rgb(85, 255, 0); color:black;</string>
+            <string notr="true">
+  background: #FF4742;
+  border-radius: 10px;
+  box-shadow: #5E5DF0 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 24px;
+  opacity: 1;
+
+  padding: 5px 10px;
+  touch-action: manipulation;
+  width: 60px;
+
+</string>
            </property>
            <property name="text">
-            <string>Linked</string>
+            <string>Link</string>
+           </property>
+           <property name="icon">
+            <iconset resource="resourrces.qrc">
+             <normaloff>:/Icons/Icons/link-square-svgrepo-com.svg</normaloff>:/Icons/Icons/link-square-svgrepo-com.svg</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
            </property>
           </widget>
          </item>
          <item>
-          <spacer name="horizontalSpacer_2">
+          <widget class="Line" name="line_2">
+           <property name="styleSheet">
+            <string notr="true">/* Line style */
+
+  /* Set the width of the line */
+  width: 20px;
+
+  /* Set the height of the line */
+  height: 5px;
+
+  /* Set the background color of the line */
+  background-color: white;
+
+  /* Set the border of the line */
+  border: 10px;
+
+  /* Set the border radius of the line */
+  border-radius:5px;
+
+
+
+</string>
+           </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
+          </widget>
          </item>
         </layout>
        </item>
@@ -209,6 +811,11 @@
         <layout class="QVBoxLayout" name="verticalLayout_6">
          <item>
           <widget class="QLabel" name="label_10">
+           <property name="styleSheet">
+            <string notr="true">font-family: 'Gabarito', cursive;
+font-size: 20px;
+color: #fff;</string>
+           </property>
            <property name="text">
             <string>Graph 2</string>
            </property>
@@ -218,6 +825,32 @@
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
             <widget class="QSlider" name="verticalSlider_2">
+             <property name="styleSheet">
+              <string notr="true">/* Style for the QSlider (Vertical) */
+QSlider::groove:vertical {
+    background: #fff; /* Color of the track */
+    border: 1px solid #999; /* Border of the track */
+    width: 10px; /* Set the width of the track */
+    border-radius: 5px; /* Round the corners of the track */
+}
+
+/* Style for the slider handle (thumb) on a vertical slider */
+QSlider::handle:vertical {
+    background: #FF4742; /* Color of the handle */
+    border: 1px solid; /* Border of the handle */
+    width: 30px; /* Width of the handle */
+    height: 20px; /* Height of the handle */
+    margin: 0 -5px; /* Negative margin to center the handle horizontally */
+    border-radius: 10px; /* Round the corners of the handle */
+}
+
+/* Style for the slider handle when pressed on a vertical slider */
+QSlider::handle:vertical:pressed {
+    background: #FF4742; /* Color of the handle when pressed */
+    border: 1px solid #3498db; /* Border of the handle when pressed */
+}
+</string>
+             </property>
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>
@@ -230,6 +863,40 @@
          </item>
          <item>
           <widget class="QSlider" name="horizontalSlider_4">
+           <property name="styleSheet">
+            <string notr="true">/* Style for the QSlider */
+
+/* Background of the slider track */
+QSlider {
+    background-color: transparent;
+    height: 10px; /* Set the height of the track */
+}
+
+/* Style for the groove (track) */
+QSlider::groove {
+    background: #fff; /* Color of the track */
+    border: 1px solid #999; /* Border of the track */
+    height: 10px; /* Set the height of the track */
+    border-radius: 5px; /* Round the corners of the track */
+}
+
+/* Style for the slider handle (thumb) */
+QSlider::handle {
+    background: #FF4742; /* Color of the handle */
+    border: 1px solid ; /* Border of the handle */
+    width: 20px; /* Width of the handle */
+    height: 30px; /* Height of the handle */
+    margin: -5px 0; /* Negative margin to center the handle vertically */
+    border-radius: 10px; /* Round the corners of the handle */
+}
+
+/* Style for the slider handle when pressed */
+QSlider::handle:pressed {
+    background: #FF4742; /* Color of the handle when pressed */
+    border: 1px solid #3498db; /* Border of the handle when pressed */
+}
+</string>
+           </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -247,32 +914,260 @@
              </property>
              <item>
               <widget class="QLabel" name="label_11">
+               <property name="font">
+                <font>
+                 <family>Gabarito</family>
+                 <pointsize>-1</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font-family: 'Gabarito', cursive;
+font-size: 20px;
+color: #fff;</string>
+               </property>
                <property name="text">
                 <string>Channels</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBox_4"/>
+              <widget class="QComboBox" name="comboBox_4">
+               <property name="styleSheet">
+                <string notr="true">/* QComboBox style */
+
+.QComboBox {
+  /* Set the width of the combo box */
+  width: 100px;
+
+  /* Set the background color of the combo box */
+  background-color: #f8f9fa;
+
+  /* Set the border of the combo box */
+  border: 1px solid #e6e6e6;
+
+  /* Set the border radius of the combo box */
+  border-radius: 5px;
+
+  /* Set the padding of the combo box */
+  padding: 5px;
+
+  /* Set the cursor style of the combo box */
+  cursor: pointer;
+}
+
+.QComboBox::down-arrow {
+  /* Set the width and height of the down arrow */
+  width: 15px;
+  height: 15px;
+
+  /* Set the background color of the down arrow */
+  background-color: #ccc;
+
+  /* Set the border radius of the down arrow */
+  border-radius: 5px;
+
+  /* Set the position of the down arrow */
+  position: absolute;
+  right: -10px;
+  bottom: 5px;
+
+  /* Set the cursor style of the down arrow */
+  cursor: pointer;
+}
+
+.QComboBox::down-arrow:hover {
+  /* Set the background color of the down arrow when hovering */
+  background-color: #aaa;
+}
+
+.QComboBox::drop-down {
+  /* Set the width of the drop-down */
+  width: 70px;
+
+  /* Set the background color of the drop-down */
+  background-color: white;
+
+  /* Set the border of the drop-down */
+  border: 1px solid #e6e6e6;
+
+  /* Set the border radius of the drop-down */
+  border-radius: 5px;
+
+  /* Set the padding of the drop-down */
+  padding: 5px;
+
+  /* Set the cursor style of the drop-down */
+  cursor: pointer;
+}
+
+.QComboBox::item {
+  /* Set the height of the combo box items */
+  height: 20px;
+
+  /* Set the padding of the combo box items */
+  padding: 5px;
+
+  /* Set the cursor style of the combo box items */
+  cursor: pointer;
+}
+
+.QComboBox::item:selected {
+  /* Set the background color of the selected combo box item */
+  background-color: #e6e6e6;
+}
+
+.QComboBox {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
            <item>
             <widget class="QPushButton" name="pushButton_10">
+             <property name="font">
+              <font>
+               <family>-apple-system</family>
+               <pointsize>14</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">appearance: button;
+backface-visibility: hidden;
+background-color: #405cf5;
+border-radius: 6px;
+border-width: 0;
+box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+box-sizing: border-box;
+color: #fff;
+cursor: pointer;
+font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
+font-size: 100%;
+height: 30px;
+line-height: 1.15;
+outline: none;
+overflow: hidden;
+padding: 3 10px;
+position: relative;
+text-align: center;
+text-transform: none;
+transform: translateZ(0);
+transition: all .2s,box-shadow .08s ease-in;
+user-select: none;
+-webkit-user-select: none;
+touch-action: manipulation;
+width: 100%; /* Reduced width to 200 pixels */
+</string>
+             </property>
              <property name="text">
               <string>Delete</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resourrces.qrc">
+               <normaloff>:/Icons/Icons/delete-svgrepo-com.svg</normaloff>:/Icons/Icons/delete-svgrepo-com.svg</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="pushButton_8">
+             <property name="font">
+              <font>
+               <family>-apple-system</family>
+               <pointsize>14</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">appearance: button;
+backface-visibility: hidden;
+background-color: #405cf5;
+border-radius: 6px;
+border-width: 0;
+box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+box-sizing: border-box;
+color: #fff;
+cursor: pointer;
+font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
+font-size: 100%;
+height: 30px;
+line-height: 1.15;
+outline: none;
+overflow: hidden;
+padding: 3 8px;
+position: relative;
+text-align: center;
+text-transform: none;
+transform: translateZ(0);
+transition: all .2s,box-shadow .08s ease-in;
+user-select: none;
+-webkit-user-select: none;
+touch-action: manipulation;
+width: 100%; /* Reduced width to 200 pixels */
+</string>
+             </property>
              <property name="text">
-              <string>Pick a Color</string>
+              <string> Color</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resourrces.qrc">
+               <normaloff>:/Icons/Icons/color-palette-svgrepo-com.svg</normaloff>:/Icons/Icons/color-palette-svgrepo-com.svg</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>22</width>
+               <height>22</height>
+              </size>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QCheckBox" name="checkBox_3">
+             <property name="styleSheet">
+              <string notr="true">/* Hide the default checkbox */
+QCheckBox::indicator {
+    width: 20px;
+    height: 20px;
+    background-color: #fff; /* Background color of the checkbox */
+    border: 2px solid #3498db; /* Border color of the checkbox */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Define the checkbox color when checked */
+QCheckBox::indicator:checked {
+    background-color: #2ecc71; /* Checkbox color when checked */
+    border-color: #27ae60; /* Border color when checked */
+
+}
+
+/* Define the checkbox hover effect */
+QCheckBox::indicator:hover {
+    background-color: #3498db; /* Hover color */
+
+}
+
+/* Define the checkbox text color */
+QCheckBox {
+    color: #fff;
+}
+
+/* Define the spacing between the checkbox and label */
+QCheckBox::indicator::unchecked,
+QCheckBox::indicator::checked {
+    spacing: 10px;
+}
+</string>
+             </property>
              <property name="text">
               <string>Visability</string>
              </property>
@@ -280,10 +1175,35 @@
            </item>
            <item>
             <widget class="QLineEdit" name="lineEdit_3">
+             <property name="styleSheet">
+              <string notr="true">  position: relative;
+  display: inline-block;
+  height: 32px;
+  width: 240px;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  border: none;
+  border-radius: 10px;
+color:#0d0d0d;</string>
+             </property>
              <property name="placeholderText">
               <string>Add Label</string>
              </property>
             </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </item>
@@ -293,7 +1213,36 @@
      </widget>
     </item>
     <item>
-     <widget class="QWidget" name="" native="true">
+     <widget class="Line" name="line_4">
+      <property name="styleSheet">
+       <string notr="true">/* Line style */
+
+  /* Set the width of the line */
+  width: 20px;
+
+  /* Set the height of the line */
+  height: 5px;
+
+  /* Set the background color of the line */
+  background-color: white;
+
+  /* Set the border of the line */
+  border: 10px;
+
+  /* Set the border radius of the line */
+  border-radius:5px;
+
+
+
+</string>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="leftwidget" native="true">
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <property name="spacing">
         <number>30</number>
@@ -310,27 +1259,117 @@
           <number>3</number>
          </property>
          <item>
-          <spacer name="horizontalSpacer_4">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
           <widget class="QLabel" name="label_8">
+           <property name="font">
+            <font>
+             <family>Gabarito</family>
+             <pointsize>-1</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-family: 'Gabarito', cursive;
+font-size: 20px;
+color: #fff;</string>
+           </property>
            <property name="text">
             <string>Graph</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_3"/>
+          <widget class="QComboBox" name="comboBox_3">
+           <property name="styleSheet">
+            <string notr="true">/* QComboBox style */
+
+.QComboBox {
+  /* Set the width of the combo box */
+  width: 20px;
+
+  /* Set the background color of the combo box */
+  background-color: #f8f9fa;
+
+  /* Set the border of the combo box */
+  border: 1px solid #e6e6e6;
+
+  /* Set the border radius of the combo box */
+  border-radius: 5px;
+
+  /* Set the padding of the combo box */
+  padding: 5px;
+
+  /* Set the cursor style of the combo box */
+  cursor: pointer;
+}
+
+.QComboBox::down-arrow {
+  /* Set the width and height of the down arrow */
+  width: 10px;
+  height: 10px;
+
+  /* Set the background color of the down arrow */
+  background-color: #ccc;
+
+  /* Set the border radius of the down arrow */
+  border-radius: 5px;
+
+  /* Set the position of the down arrow */
+  position: absolute;
+  right: -10px;
+  bottom: 5px;
+
+  /* Set the cursor style of the down arrow */
+  cursor: pointer;
+}
+
+.QComboBox::down-arrow:hover {
+  /* Set the background color of the down arrow when hovering */
+  background-color: #aaa;
+}
+
+.QComboBox::drop-down {
+  /* Set the width of the drop-down */
+  width: 40px;
+
+  /* Set the background color of the drop-down */
+  background-color: white;
+
+  /* Set the border of the drop-down */
+  border: 1px solid #e6e6e6;
+
+  /* Set the border radius of the drop-down */
+  border-radius: 5px;
+
+  /* Set the padding of the drop-down */
+  padding: 3px 3px;
+
+  /* Set the cursor style of the drop-down */
+  cursor: pointer;
+}
+
+.QComboBox::item {
+  /* Set the height of the combo box items */
+  height: 20px;
+
+  /* Set the padding of the combo box items */
+  padding: 5px;
+
+  /* Set the cursor style of the combo box items */
+  cursor: pointer;
+}
+
+.QComboBox::item:selected {
+  /* Set the background color of the selected combo box item */
+  background-color: #e6e6e6;
+}
+
+.QComboBox {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+</string>
+           </property>
+          </widget>
          </item>
          <item>
           <spacer name="horizontalSpacer">
@@ -349,15 +1388,166 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_5">
+         <property name="font">
+          <font>
+           <family>-apple-system</family>
+           <pointsize>14</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
+  font-size: 100%;
+  height: 44px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 10px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+
+</string>
+         </property>
          <property name="text">
           <string>Play/Pause</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resourrces.qrc">
+           <normaloff>:/Icons/Icons/play-svgrepo-com.svg</normaloff>:/Icons/Icons/play-svgrepo-com.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>22</width>
+           <height>22</height>
+          </size>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_6">
+         <property name="font">
+          <font>
+           <family>-apple-system</family>
+           <pointsize>14</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
+  font-size: 100%;
+  height: 44px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+
+</string>
+         </property>
          <property name="text">
           <string>Rewind</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resourrces.qrc">
+           <normaloff>:/Icons/Icons/rewind-forward-svgrepo-com.svg</normaloff>:/Icons/Icons/rewind-forward-svgrepo-com.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_4">
+         <property name="font">
+          <font>
+           <family>-apple-system</family>
+           <pointsize>14</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
+  font-size: 100%;
+  height: 44px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+
+</string>
+         </property>
+         <property name="text">
+          <string>Clear</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resourrces.qrc">
+           <normaloff>:/Icons/Icons/clear-svgrepo-com.svg</normaloff>:/Icons/Icons/clear-svgrepo-com.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -368,8 +1558,21 @@
          </property>
          <item>
           <widget class="QLabel" name="label">
+           <property name="font">
+            <font>
+             <family>Gabarito</family>
+             <pointsize>-1</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-family: 'Gabarito', cursive;
+font-size: 20px;
+font-weight: 900px;
+color: #fff;</string>
+           </property>
            <property name="text">
-            <string>Zoom </string>
+            <string>Zoom - X</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -378,6 +1581,40 @@
          </item>
          <item>
           <widget class="QSlider" name="horizontalSlider">
+           <property name="styleSheet">
+            <string notr="true">/* Style for the QSlider */
+
+/* Background of the slider track */
+QSlider {
+    background-color: transparent;
+    height: 10px; /* Set the height of the track */
+}
+
+/* Style for the groove (track) */
+QSlider::groove {
+    background: #fff; /* Color of the track */
+    border: 1px solid #999; /* Border of the track */
+    height: 10px; /* Set the height of the track */
+    border-radius: 5px; /* Round the corners of the track */
+}
+
+/* Style for the slider handle (thumb) */
+QSlider::handle {
+    background: #FF4742; /* Color of the handle */
+    border: 1px solid ; /* Border of the handle */
+    width: 20px; /* Width of the handle */
+    height: 30px; /* Height of the handle */
+    margin: -5px 0; /* Negative margin to center the handle vertically */
+    border-radius: 10px; /* Round the corners of the handle */
+}
+
+/* Style for the slider handle when pressed */
+QSlider::handle:pressed {
+    background: #FF4742; /* Color of the handle when pressed */
+    border: 1px solid #3498db; /* Border of the handle when pressed */
+}
+</string>
+           </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -386,11 +1623,74 @@
         </layout>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_4">
-         <property name="text">
-          <string>Clear</string>
+        <layout class="QVBoxLayout" name="verticalLayout_17">
+         <property name="spacing">
+          <number>2</number>
          </property>
-        </widget>
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="font">
+            <font>
+             <family>Gabarito</family>
+             <pointsize>-1</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-family: 'Gabarito', cursive;
+font-size: 20px;
+color: #fff;</string>
+           </property>
+           <property name="text">
+            <string>Zoom - Y</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSlider" name="horizontalSlider_11">
+           <property name="styleSheet">
+            <string notr="true">/* Style for the QSlider */
+
+/* Background of the slider track */
+QSlider {
+    background-color: transparent;
+    height: 10px; /* Set the height of the track */
+}
+
+/* Style for the groove (track) */
+QSlider::groove {
+    background: #fff; /* Color of the track */
+    border: 1px solid #999; /* Border of the track */
+    height: 10px; /* Set the height of the track */
+    border-radius: 5px; /* Round the corners of the track */
+}
+
+/* Style for the slider handle (thumb) */
+QSlider::handle {
+    background: #FF4742; /* Color of the handle */
+    border: 1px solid ; /* Border of the handle */
+    width: 20px; /* Width of the handle */
+    height: 30px; /* Height of the handle */
+    margin: -5px 0; /* Negative margin to center the handle vertically */
+    border-radius: 10px; /* Round the corners of the handle */
+}
+
+/* Style for the slider handle when pressed */
+QSlider::handle:pressed {
+    background: #FF4742; /* Color of the handle when pressed */
+    border: 1px solid #3498db; /* Border of the handle when pressed */
+}
+</string>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -399,6 +1699,18 @@
          </property>
          <item>
           <widget class="QLabel" name="label_9">
+           <property name="font">
+            <font>
+             <family>Gabarito</family>
+             <pointsize>-1</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">font-family: 'Gabarito', cursive;
+font-size: 20px;
+color: #fff;</string>
+           </property>
            <property name="text">
             <string>Speed</string>
            </property>
@@ -409,6 +1721,40 @@
          </item>
          <item>
           <widget class="QSlider" name="horizontalSlider_2">
+           <property name="styleSheet">
+            <string notr="true">/* Style for the QSlider */
+
+/* Background of the slider track */
+QSlider {
+    background-color: transparent;
+    height: 10px; /* Set the height of the track */
+}
+
+/* Style for the groove (track) */
+QSlider::groove {
+    background: #fff; /* Color of the track */
+    border: 1px solid #999; /* Border of the track */
+    height: 10px; /* Set the height of the track */
+    border-radius: 5px; /* Round the corners of the track */
+}
+
+/* Style for the slider handle (thumb) */
+QSlider::handle {
+    background: #FF4742; /* Color of the handle */
+    border: 1px solid ; /* Border of the handle */
+    width: 20px; /* Width of the handle */
+    height: 30px; /* Height of the handle */
+    margin: -5px 0; /* Negative margin to center the handle vertically */
+    border-radius: 10px; /* Round the corners of the handle */
+}
+
+/* Style for the slider handle when pressed */
+QSlider::handle:pressed {
+    background: #FF4742; /* Color of the handle when pressed */
+    border: 1px solid #3498db; /* Border of the handle when pressed */
+}
+</string>
+           </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -439,8 +1785,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>842</width>
-     <height>21</height>
+     <width>1308</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>
@@ -454,6 +1800,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="resourrces.qrc"/>
+ </resources>
  <connections/>
 </ui>

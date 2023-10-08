@@ -1,5 +1,5 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QFileDialog, QDialog, QApplication, QMainWindow,QMessageBox,QColorDialog
+from PyQt6.QtWidgets import QFileDialog, QDialog, QApplication, QMainWindow, QMessageBox, QColorDialog
 import wfdb
 import matplotlib.pyplot as plt
 import numpy as np
@@ -16,20 +16,21 @@ from itertools import cycle
 
 
 class MainWindow(QtWidgets.QMainWindow):
-    
+
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
 
         # Load the UI Page
         uic.loadUi('mainwindow.ui', self)
 
-        self.pushButton.clicked.connect(self.browse)
+        self.importButton.clicked.connect(self.browse)
         self.signal_curve = None  # Initialize the curve for the signal
         self.all_curves = []
         self.timer = None  # Initialize the QTimer
-        self.QComboBox.addItem('All channels')  # Add "All channels" to the combo box
-        self.QComboBox.activated.connect(self.on_combobox_activated)
-        self.pushButton_9.clicked.connect(self.pick_channel_color)
+        # Add "All channels" to the combo box
+        self.channelsGraph1.addItem('All channels')
+        self.channelsGraph1.activated.connect(self.on_combobox_activated)
+        self.colorButtonGraph1.clicked.connect(self.pick_channel_color)
         self.channel_plots = []
 
     def browse(self):
@@ -49,16 +50,18 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.all_curves.append(signal_data)
 
                 # Create a unique color for the new channel using pg.intColor()
-                color = pg.intColor(len(self.all_curves) - 1, hues=len(self.all_curves) * 2)
+                color = pg.intColor(len(self.all_curves) - 1,
+                                    hues=len(self.all_curves) * 2)
 
                 # Plot the newly added curve and store the PlotDataItem
                 sampling_frequency = self.record.fs
                 time = np.arange(0, len(signal_data)) / sampling_frequency
-                plot_item = self.graphWidget.plot(time, signal_data[:, 0], pen=color)
+                plot_item = self.graph1.plot(
+                    time, signal_data[:, 0], pen=color)
                 self.channel_plots.append(plot_item)  # Store the PlotDataItem
 
             # Adding channels to the combo box
-            self.QComboBox.addItem(f'Channel {len(self.all_curves)}')
+            self.channelsGraph1.addItem(f'Channel {len(self.all_curves)}')
 
     def show_error_message(self, message):
         msg_box = QMessageBox()
@@ -80,36 +83,37 @@ class MainWindow(QtWidgets.QMainWindow):
     def plot_all_channels(self):
         if self.all_curves:
             # Clear the current plot
-            self.graphWidget.clear()
-            
+            self.graph1.clear()
+
             # Get a unique color for each curve using pg.intColor()
-            colors = [pg.intColor(i, hues=len(self.all_curves) * 2) for i in range(len(self.all_curves))]
-            
+            colors = [pg.intColor(i, hues=len(self.all_curves) * 2)
+                      for i in range(len(self.all_curves))]
+
             # Plot all channels
             for signal_data, color in zip(self.all_curves, colors):
                 sampling_frequency = self.record.fs
                 time = np.arange(0, len(signal_data)) / sampling_frequency
-                self.graphWidget.plot(time, signal_data[:, 0], pen=color)
+                self.graph1.plot(time, signal_data[:, 0], pen=color)
 
     def plot_single_channel(self, channel_index):
         if 0 <= channel_index < len(self.all_curves):
             # Clear the current plot
-            self.graphWidget.clear()
-            
+            self.graph1.clear()
+
             # Get a unique color for the selected channel
-            pen_color = pg.intColor(channel_index, hues=len(self.all_curves) * 2)
-            
+            pen_color = pg.intColor(
+                channel_index, hues=len(self.all_curves) * 2)
+
             # Plot the selected channel
             signal_data = self.all_curves[channel_index]
             sampling_frequency = self.record.fs
             time = np.arange(0, len(signal_data)) / sampling_frequency
-            self.graphWidget.plot(time, signal_data[:, 0], pen=pen_color)
+            self.graph1.plot(time, signal_data[:, 0], pen=pen_color)
         else:
             self.show_error_message('Invalid channel selection')
 
-
     def pick_channel_color(self):
-        selected_channel_index = self.QComboBox.currentIndex()
+        selected_channel_index = self.channelsGraph1.currentIndex()
 
         # Check if the selected channel is a valid index
         if selected_channel_index == 0:
@@ -122,12 +126,10 @@ class MainWindow(QtWidgets.QMainWindow):
                 new_color = pg.mkColor(color.name())
 
                 # Update the pen color of the selected channel's curve
-                self.channel_plots[selected_channel_index - 1].setPen(new_color)
+                self.channel_plots[selected_channel_index -
+                                   1].setPen(new_color)
         else:
             self.show_error_message('Invalid channel selection')
-
-
-
 
 
 def main():

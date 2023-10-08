@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1308</width>
+    <width>1311</width>
     <height>826</height>
    </rect>
   </property>
@@ -41,7 +41,7 @@
         <number>5</number>
        </property>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="importButton">
          <property name="font">
           <font>
            <family>-apple-system</family>
@@ -83,7 +83,7 @@
          </property>
          <property name="icon">
           <iconset resource="resourrces.qrc">
-           <normaloff>:/Icons/Icons/upload-.svg</normaloff>:/Icons/Icons/upload-.svg</iconset>
+           <normaloff>Icons/upload-.svg</normaloff>Icons/upload-.svg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -94,7 +94,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="reportButton">
          <property name="font">
           <font>
            <family>-apple-system</family>
@@ -138,7 +138,7 @@
          </property>
          <property name="icon">
           <iconset resource="resourrces.qrc">
-           <normaloff>:/Icons/Icons/book-2-svgrepo-com.svg</normaloff>:/Icons/Icons/book-2-svgrepo-com.svg</iconset>
+           <normaloff>Icons/book-2-svgrepo-com.svg</normaloff>Icons/book-2-svgrepo-com.svg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -149,7 +149,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_20">
+        <widget class="QPushButton" name="saveButton">
          <property name="font">
           <font>
            <family>-apple-system</family>
@@ -193,7 +193,7 @@
          </property>
          <property name="icon">
           <iconset resource="resourrces.qrc">
-           <normaloff>:/Icons/Icons/save.png</normaloff>:/Icons/Icons/save.png</iconset>
+           <normaloff>Icons/save.png</normaloff>Icons/save.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -347,7 +347,7 @@ QSlider::handle:vertical:pressed {
             </widget>
            </item>
            <item>
-            <widget class="PlotWidget" name="graphWidget" native="true"/>
+            <widget class="PlotWidget" name="graph1" native="true"/>
            </item>
           </layout>
          </item>
@@ -403,7 +403,7 @@ QSlider::handle:pressed {
               <number>3</number>
              </property>
              <item>
-              <widget class="QLabel" name="label_14">
+              <widget class="QLabel" name="channelsGraph1Label">
                <property name="font">
                 <font>
                  <family>Gabarito</family>
@@ -422,7 +422,7 @@ color: #fff;</string>
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="QComboBox">
+              <widget class="QComboBox" name="channelsGraph1">
                <property name="styleSheet">
                 <string notr="true">/* QComboBox style */
 
@@ -518,7 +518,7 @@ color: #fff;</string>
             </layout>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_3">
+            <widget class="QPushButton" name="deleteButtonGraph1">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -571,7 +571,7 @@ width: 100%; /* Reduced width to 200 pixels */
              </property>
              <property name="icon">
               <iconset resource="resourrces.qrc">
-               <normaloff>:/Icons/Icons/delete-svgrepo-com.svg</normaloff>:/Icons/Icons/delete-svgrepo-com.svg</iconset>
+               <normaloff>Icons/delete-svgrepo-com.svg</normaloff>Icons/delete-svgrepo-com.svg</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -591,7 +591,7 @@ width: 100%; /* Reduced width to 200 pixels */
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_9">
+            <widget class="QPushButton" name="colorButtonGraph1">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -645,7 +645,7 @@ width: 100%; /* Reduced width to 200 pixels */
              </property>
              <property name="icon">
               <iconset resource="resourrces.qrc">
-               <normaloff>:/Icons/Icons/color-palette-svgrepo-com.svg</normaloff>:/Icons/Icons/color-palette-svgrepo-com.svg</iconset>
+               <normaloff>Icons/color-palette-svgrepo-com.svg</normaloff>Icons/color-palette-svgrepo-com.svg</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -656,7 +656,7 @@ width: 100%; /* Reduced width to 200 pixels */
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="checktoggle">
+            <widget class="QCheckBox" name="visabilityGraph1">
              <property name="styleSheet">
               <string notr="true">
 /* Hide the default checkbox */
@@ -698,7 +698,7 @@ QCheckBox::indicator::checked {
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_4">
+            <widget class="QLineEdit" name="addLabelGraph1">
              <property name="styleSheet">
               <string notr="true">  position: relative;
   display: inline-block;
@@ -768,7 +768,7 @@ QCheckBox::indicator::checked {
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_7">
+          <widget class="QPushButton" name="linkButton">
            <property name="enabled">
             <bool>true</bool>
            </property>
@@ -797,7 +797,7 @@ QCheckBox::indicator::checked {
            </property>
            <property name="icon">
             <iconset resource="resourrces.qrc">
-             <normaloff>:/Icons/Icons/link-square-svgrepo-com.svg</normaloff>:/Icons/Icons/link-square-svgrepo-com.svg</iconset>
+             <normaloff>Icons/link-square-svgrepo-com.svg</normaloff>Icons/link-square-svgrepo-com.svg</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -888,7 +888,7 @@ QSlider::handle:vertical:pressed {
             </widget>
            </item>
            <item>
-            <widget class="PlotWidget" name="graphWidget_1" native="true"/>
+            <widget class="PlotWidget" name="graph2" native="true"/>
            </item>
           </layout>
          </item>
@@ -944,7 +944,7 @@ QSlider::handle:pressed {
               <number>3</number>
              </property>
              <item>
-              <widget class="QLabel" name="label_11">
+              <widget class="QLabel" name="channelsGraph2Label">
                <property name="font">
                 <font>
                  <family>Gabarito</family>
@@ -963,7 +963,7 @@ color: #fff;</string>
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBox_4">
+              <widget class="QComboBox" name="channelsGraph2">
                <property name="styleSheet">
                 <string notr="true">/* QComboBox style */
 
@@ -1059,7 +1059,7 @@ color: #fff;</string>
             </layout>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_10">
+            <widget class="QPushButton" name="deleteButtonGraph2">
              <property name="font">
               <font>
                <family>-apple-system</family>
@@ -1100,7 +1100,7 @@ width: 100%; /* Reduced width to 200 pixels */
              </property>
              <property name="icon">
               <iconset resource="resourrces.qrc">
-               <normaloff>:/Icons/Icons/delete-svgrepo-com.svg</normaloff>:/Icons/Icons/delete-svgrepo-com.svg</iconset>
+               <normaloff>Icons/delete-svgrepo-com.svg</normaloff>Icons/delete-svgrepo-com.svg</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -1111,7 +1111,7 @@ width: 100%; /* Reduced width to 200 pixels */
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_8">
+            <widget class="QPushButton" name="colorButtonGraph2">
              <property name="font">
               <font>
                <family>-apple-system</family>
@@ -1152,7 +1152,7 @@ width: 100%; /* Reduced width to 200 pixels */
              </property>
              <property name="icon">
               <iconset resource="resourrces.qrc">
-               <normaloff>:/Icons/Icons/color-palette-svgrepo-com.svg</normaloff>:/Icons/Icons/color-palette-svgrepo-com.svg</iconset>
+               <normaloff>Icons/color-palette-svgrepo-com.svg</normaloff>Icons/color-palette-svgrepo-com.svg</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -1163,7 +1163,7 @@ width: 100%; /* Reduced width to 200 pixels */
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="checkBox_3">
+            <widget class="QCheckBox" name="visabilityGraph2">
              <property name="styleSheet">
               <string notr="true">/* Hide the default checkbox */
 QCheckBox::indicator {
@@ -1205,7 +1205,7 @@ QCheckBox::indicator::checked {
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_3">
+            <widget class="QLineEdit" name="addLabelGraph2">
              <property name="styleSheet">
               <string notr="true">  position: relative;
   display: inline-block;
@@ -1309,7 +1309,7 @@ color: #fff;</string>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_3">
+          <widget class="QComboBox" name="graphSelection">
            <property name="styleSheet">
             <string notr="true">/* QComboBox style */
 
@@ -1400,6 +1400,16 @@ color: #fff;</string>
 
 </string>
            </property>
+           <item>
+            <property name="text">
+             <string>Graph1</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Graph2</string>
+            </property>
+           </item>
           </widget>
          </item>
          <item>
@@ -1447,7 +1457,7 @@ color: #fff;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_5">
+        <widget class="QPushButton" name="playButton">
          <property name="font">
           <font>
            <family>-apple-system</family>
@@ -1487,11 +1497,11 @@ color: #fff;</string>
 </string>
          </property>
          <property name="text">
-          <string>Play/Pause</string>
+          <string>Play</string>
          </property>
          <property name="icon">
           <iconset resource="resourrces.qrc">
-           <normaloff>:/Icons/Icons/play-svgrepo-com.svg</normaloff>:/Icons/Icons/play-svgrepo-com.svg</iconset>
+           <normaloff>Icons/play-svgrepo-com.svg</normaloff>Icons/play-svgrepo-com.svg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -1502,7 +1512,7 @@ color: #fff;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_6">
+        <widget class="QPushButton" name="rewindButton">
          <property name="font">
           <font>
            <family>-apple-system</family>
@@ -1546,7 +1556,7 @@ color: #fff;</string>
          </property>
          <property name="icon">
           <iconset resource="resourrces.qrc">
-           <normaloff>:/Icons/Icons/rewind-forward-svgrepo-com.svg</normaloff>:/Icons/Icons/rewind-forward-svgrepo-com.svg</iconset>
+           <normaloff>Icons/rewind-forward-svgrepo-com.svg</normaloff>Icons/rewind-forward-svgrepo-com.svg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -1557,7 +1567,7 @@ color: #fff;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_4">
+        <widget class="QPushButton" name="clearButton">
          <property name="font">
           <font>
            <family>-apple-system</family>
@@ -1601,7 +1611,7 @@ color: #fff;</string>
          </property>
          <property name="icon">
           <iconset resource="resourrces.qrc">
-           <normaloff>:/Icons/Icons/clear-svgrepo-com.svg</normaloff>:/Icons/Icons/clear-svgrepo-com.svg</iconset>
+           <normaloff>Icons/clear-svgrepo-com.svg</normaloff>Icons/clear-svgrepo-com.svg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -1646,7 +1656,7 @@ color: #fff;</string>
           <number>2</number>
          </property>
          <item>
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="zoomXLable">
            <property name="font">
             <font>
              <family>Gabarito</family>
@@ -1669,7 +1679,7 @@ color: #fff;</string>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="horizontalSlider">
+          <widget class="QSlider" name="zoomXSlider">
            <property name="styleSheet">
             <string notr="true">/* Style for the QSlider */
 
@@ -1717,7 +1727,7 @@ QSlider::handle:pressed {
           <number>2</number>
          </property>
          <item>
-          <widget class="QLabel" name="label_5">
+          <widget class="QLabel" name="zoomYLable">
            <property name="font">
             <font>
              <family>Gabarito</family>
@@ -1739,7 +1749,7 @@ color: #fff;</string>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="horizontalSlider_11">
+          <widget class="QSlider" name="zoomYSlider">
            <property name="styleSheet">
             <string notr="true">/* Style for the QSlider */
 
@@ -1787,7 +1797,7 @@ QSlider::handle:pressed {
           <number>2</number>
          </property>
          <item>
-          <widget class="QLabel" name="label_9">
+          <widget class="QLabel" name="speedLabel">
            <property name="font">
             <font>
              <family>Gabarito</family>
@@ -1809,7 +1819,7 @@ color: #fff;</string>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="horizontalSlider_2">
+          <widget class="QSlider" name="speedSlider">
            <property name="styleSheet">
             <string notr="true">/* Style for the QSlider */
 
@@ -1875,8 +1885,8 @@ QSlider::handle:pressed {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1308</width>
-     <height>22</height>
+     <width>1311</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>

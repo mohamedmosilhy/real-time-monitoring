@@ -15,8 +15,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
 
-        self.TempArrX = []
-        self.TempArrY = []
+        self.time = []
+        self.data = []
         self.data_index = 50
 
         self.graph1 = pg.PlotWidget()
@@ -50,8 +50,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.open_file(file_path)
 
     def open_file(self, path: str):
-        self.TempArrX = []
-        self.TempArrY = []
+        self.time = []
+        self.data = []
 
         # Initialize the sampling frequency
         self.fsampling = 1
@@ -65,13 +65,13 @@ class MainWindow(QtWidgets.QMainWindow):
             self.record = wfdb.rdrecord(path[:-4], channels=[0])
 
             # Extract the signal data
-            self.TempArrY = np.concatenate(self.record.p_signal)
+            self.data = np.concatenate(self.record.p_signal)
 
             # Update the sampling frequency
             self.fsampling = self.record.fs
 
             # Generate time values for each sample
-            self.TempArrX = np.arange(len(self.TempArrY)) / self.fsampling
+            self.time = np.arange(len(self.data)) / self.fsampling
 
         # Check if the file type is CSV, text (txt), or Excel (xls)
         if filetype in ["csv", "txt", "xls"]:
@@ -89,8 +89,8 @@ class MainWindow(QtWidgets.QMainWindow):
                     amplitude_value = float(row[1])
 
                     # Append the time and amplitude values to respective lists
-                    self.TempArrX.append(time_value)
-                    self.TempArrY.append(amplitude_value)
+                    self.time.append(time_value)
+                    self.data.append(amplitude_value)
 
         # Plot the data using PyQtGraph
         if self.signal is not None:
@@ -98,26 +98,26 @@ class MainWindow(QtWidgets.QMainWindow):
 
         pen = pg.mkPen(color=(255, 0, 0))
 
-        self.X = self.TempArrX[:self.data_index]
-        self.Y = self.TempArrY[:self.data_index]
+        self.sub_time = self.time[:self.data_index]
+        self.sub_data = self.data[:self.data_index]
 
-        self.TempArrY = self.TempArrY[self.data_index:]
-        self.TempArrX = self.TempArrX[self.data_index:]
+        self.data = self.data[self.data_index:]
+        self.time = self.time[self.data_index:]
 
-        self.signal = self.graph1.plot(self.X, self.Y, pen=pen)
+        self.signal = self.graph1.plot(self.sub_time, self.sub_data, pen=pen)
         self.graph1.showGrid(x=True, y=True)
 
         if not self.timer.isActive():
             self.timer.start()
 
     def update_plot_data(self):
-        if len(self.TempArrX) > 1:
-            self.X = self.TempArrX[:self.data_index + 5]
-            self.Y = self.TempArrY[:self.data_index + 5]
+        if len(self.time) > 1:
+            self.sub_time = self.time[:self.data_index + 5]
+            self.sub_data = self.data[:self.data_index + 5]
 
             self.data_index += 5
 
-            self.signal.setData(self.X, self.Y)
+            self.signal.setData(self.sub_time, self.sub_data)
 
     def show_error_message(self, message):
         msg_box = QMessageBox()

@@ -19,11 +19,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TempArrY = []
         self.data_index = 50
 
-        self.graph1 = pg.PlotWidget()
-        self.graph1.setLabel("bottom", "Time")
-        self.graph1.setLabel("left", "Amplitude")
-        self.graph1.showGrid(x=True, y=True)
-
         self.signal = None  # Initialize the plot curve
 
         self.timer = QtCore.QTimer()
@@ -35,6 +30,10 @@ class MainWindow(QtWidgets.QMainWindow):
     def init_ui(self):
         # Load the UI Page
         self.ui = uic.loadUi('mainwindow.ui', self)
+
+        self.graph1.setLabel("bottom", "Time")
+        self.graph1.setLabel("left", "Amplitude")
+        self.graph1.showGrid(x=True, y=True)
 
         self.importButton.clicked.connect(self.browse)
         # Add "All channels" to the combo box
@@ -70,7 +69,7 @@ class MainWindow(QtWidgets.QMainWindow):
             # Update the sampling frequency
             self.fsampling = self.record.fs
 
-            # Generate time values for each sample
+            # Generate time values for each sample (sampling interval x its multiples)
             self.TempArrX = np.arange(len(self.TempArrY)) / self.fsampling
 
         # Check if the file type is CSV, text (txt), or Excel (xls)
@@ -97,7 +96,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.graph1.removeItem(self.signal)  # Remove the previous curve
 
         pen = pg.mkPen(color=(255, 0, 0))
-
+        self.startIndex = 0
         self.X = self.TempArrX[:self.data_index]
         self.Y = self.TempArrY[:self.data_index]
 
@@ -112,12 +111,22 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def update_plot_data(self):
         if len(self.TempArrX) > 1:
-            self.X = self.TempArrX[:self.data_index + 5]
-            self.Y = self.TempArrY[:self.data_index + 5]
+            if self.data_index >= len(self.TempArrX)-1:
+                # self.signal.setData(self.TempArrX, self.TempArrY)
+                self.signal.setData(self.X, self.Y)
 
-            self.data_index += 5
+            elif self.data_index >= len(self.TempArrX)/4:
+                self.X = self.TempArrX[self.startIndex + 5:self.data_index + 5]
+                self.Y = self.TempArrY[self.startIndex + 5:self.data_index + 5]
+                self.startIndex += 5
+                self.data_index += 5
+                self.signal.setData(self.X, self.Y)
 
-            self.signal.setData(self.X, self.Y)
+            else:
+                self.X = self.TempArrX[:self.data_index + 5]
+                self.Y = self.TempArrY[:self.data_index + 5]
+                self.data_index += 5
+                self.signal.setData(self.X, self.Y)
 
     def show_error_message(self, message):
         msg_box = QMessageBox()

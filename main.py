@@ -1,5 +1,5 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QFileDialog, QDialog, QApplication, QMainWindow,QMessageBox,QColorDialog
+from PyQt6.QtWidgets import QFileDialog, QDialog, QApplication, QMainWindow, QMessageBox, QColorDialog
 import wfdb
 import numpy as np
 import sys
@@ -8,6 +8,7 @@ from pyqtgraph.Qt import QtCore
 from PyQt6 import QtWidgets, uic
 import pyqtgraph as pg
 import csv
+
 
 class MainWindow(QtWidgets.QMainWindow):
 
@@ -36,12 +37,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui = uic.loadUi('mainwindow.ui', self)
 
         self.importButton.clicked.connect(self.browse)
-        self.channelsGraph1.addItem('All channels')  # Add "All channels" to the combo box
-        #self.colorButtonGraph1.connect(self.pick_channel_color)
+        # Add "All channels" to the combo box
+        self.channelsGraph1.addItem('All channels')
+        # self.colorButtonGraph1.connect(self.pick_channel_color)
 
     def browse(self):
         file_filter = "Raw Data (*.csv *.txt *.xls *.hea *.dat *.rec)"
-        file_path, _ = QtWidgets.QFileDialog.getOpenFileName(None, 'Open Signal File', './', filter=file_filter)
+        file_path, _ = QtWidgets.QFileDialog.getOpenFileName(
+            None, 'Open Signal File', './', filter=file_filter)
 
         if file_path:
             self.open_file(file_path)
@@ -94,31 +97,28 @@ class MainWindow(QtWidgets.QMainWindow):
             self.graph1.removeItem(self.signal)  # Remove the previous curve
 
         pen = pg.mkPen(color=(255, 0, 0))
-        
+
         self.X = self.TempArrX[:self.data_index]
         self.Y = self.TempArrY[:self.data_index]
 
         self.TempArrY = self.TempArrY[self.data_index:]
         self.TempArrX = self.TempArrX[self.data_index:]
-                
 
         self.signal = self.graph1.plot(self.X, self.Y, pen=pen)
         self.graph1.showGrid(x=True, y=True)
 
-
         if not self.timer.isActive():
             self.timer.start()
-
 
     def update_plot_data(self):
         if len(self.TempArrX) > 1:
             self.X = self.TempArrX[:self.data_index + 5]
             self.Y = self.TempArrY[:self.data_index + 5]
 
-            self.data_index +=5
-            
+            self.data_index += 5
+
             self.signal.setData(self.X, self.Y)
-            
+
     def show_error_message(self, message):
         msg_box = QMessageBox()
         msg_box.setIcon(QMessageBox.Icon.Critical)

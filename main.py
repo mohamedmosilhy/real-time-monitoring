@@ -17,6 +17,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.time = []
         self.data = []
+        self.added_curves=[]
         self.data_index = 50
 
         self.graph1 = pg.PlotWidget()
@@ -91,24 +92,33 @@ class MainWindow(QtWidgets.QMainWindow):
                     # Append the time and amplitude values to respective lists
                     self.time.append(time_value)
                     self.data.append(amplitude_value)
+                    
+        self.data_index=50
+        
+        self.plot_data(self.time,self.data)
+        
+    def plot_data(self,time,data):
+            # Plot the data using PyQtGraph
+            if self.signal is not None:
+                self.graph1.removeItem(self.signal)  # Remove the previous curve
 
-        # Plot the data using PyQtGraph
-        if self.signal is not None:
-            self.graph1.removeItem(self.signal)  # Remove the previous curve
+            pen = pg.mkPen(color=(255, 0, 0))
+            
+            self.sub_time = self.time[:self.data_index]
+            self.sub_data = self.data[:self.data_index]
 
-        pen = pg.mkPen(color=(255, 0, 0))
+            self.data = self.data[self.data_index:]
+            self.time = self.time[self.data_index:]
 
-        self.sub_time = self.time[:self.data_index]
-        self.sub_data = self.data[:self.data_index]
+            self.signal = self.graph1.plot(self.sub_time, self.sub_data, pen=pen)
+            self.graph1.showGrid(x=True, y=True)
 
-        self.data = self.data[self.data_index:]
-        self.time = self.time[self.data_index:]
+            if not self.timer.isActive():
+                self.timer.start(200)
+            self.added_curves.append(self.signal)
+            
+            
 
-        self.signal = self.graph1.plot(self.sub_time, self.sub_data, pen=pen)
-        self.graph1.showGrid(x=True, y=True)
-
-        if not self.timer.isActive():
-            self.timer.start()
 
     def update_plot_data(self):
         if len(self.time) > 1:

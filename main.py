@@ -15,32 +15,29 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
 
-        self.time = []
-        self.data = []
-        self.added_curves=[]
-        self.data_index = 50
-
-        self.graph1 = pg.PlotWidget()
-        self.graph1.setLabel("bottom", "Time")
-        self.graph1.setLabel("left", "Amplitude")
-        self.graph1.showGrid(x=True, y=True)
-
-        self.signal = None  # Initialize the plot curve
+        self.signals = {"graph1": [], "graph2": []}
+        # "graph1":[[(time,data),start_index,end_index],[the rest of signals in each graph]]
+        self.signals_lines = {"graph1": [], "graph2": []}
 
         self.timer = QtCore.QTimer()
         self.timer.setInterval(50)
-        self.timer.timeout.connect(self.update_plot_data)
 
         self.init_ui()
 
     def init_ui(self):
         # Load the UI Page
         self.ui = uic.loadUi('mainwindow.ui', self)
+        self.current_graph = self.graph2  # default value
+        self.current_signal_info = ["graph2", None]  # [graph_name,plot_index]
+        self.current_graph.clear()
 
+        self.current_graph.setLabel("bottom", "Time")
+        self.current_graph.setLabel("left", "Amplitude")
+        self.current_graph.showGrid(x=True, y=True)
+
+        self.timer.timeout.connect(self.update_plot_data)
         self.importButton.clicked.connect(self.browse)
-        # Add "All channels" to the combo box
-        self.channelsGraph1.addItem('All channels')
-        # self.colorButtonGraph1.connect(self.pick_channel_color)
+        self.is_all_channels = True
 
     def browse(self):
         file_filter = "Raw Data (*.csv *.txt *.xls *.hea *.dat *.rec)"
@@ -53,7 +50,6 @@ class MainWindow(QtWidgets.QMainWindow):
     def open_file(self, path: str):
         self.time = []
         self.data = []
-
         # Initialize the sampling frequency
         self.fsampling = 1
 
@@ -71,7 +67,7 @@ class MainWindow(QtWidgets.QMainWindow):
             # Update the sampling frequency
             self.fsampling = self.record.fs
 
-            # Generate time values for each sample
+            # Generate time values for each sample (sampling interval x its multiples)
             self.time = np.arange(len(self.data)) / self.fsampling
 
         # Check if the file type is CSV, text (txt), or Excel (xls)
@@ -92,49 +88,60 @@ class MainWindow(QtWidgets.QMainWindow):
                     # Append the time and amplitude values to respective lists
                     self.time.append(time_value)
                     self.data.append(amplitude_value)
-                    
-        self.data_index=50
-        
-        self.plot_data(self.time,self.data)
-        
-    def plot_data(self,time,data):
-            # Plot the data using PyQtGraph
-            if self.signal is not None:
-                self.graph1.removeItem(self.signal)  # Remove the previous curve
 
-            pen = pg.mkPen(color=(255, 0, 0))
-            
-            self.sub_time = self.time[:self.data_index]
-            self.sub_data = self.data[:self.data_index]
+        self.X = []
+        self.Y = []
+        if self.current_graph == self.graph1:
+            self.signals["graph1"].append([(self.time, self.data), 0, 50])
+            self.current_signal_info[0] = "graph1"
+            self.current_signal_info[1] = len(self.signals["graph1"])-1
+        elif self.current_graph == self.graph2:
+            self.signals["graph2"].append([(self.time, self.data), 0, 50])
+            self.current_signal_info[0] = "graph2"
+            self.current_signal_info[1] = len(self.signals["graph2"])-1
 
-            self.data = self.data[self.data_index:]
-            self.time = self.time[self.data_index:]
+        self.plot_signal()
 
-            self.signal = self.graph1.plot(self.sub_time, self.sub_data, pen=pen)
-            self.graph1.showGrid(x=True, y=True)
+    def plot_signal(self):
+        if self.current_signal_info[-1] == 0:  # first plot in the graph
+            pen = pg.mkPen((255, 0, 0))
+            self.X = self.time[:50]
+            self.Y = self.data[:50]
+            curve = self.current_graph.plot(
+                self.X, self.Y, pen=pen)
+            self.signals_lines[self.current_signal_info[0]].append(curve)
+        else:  # other plots in the graph have been added
 
-            if not self.timer.isActive():
-                self.timer.start(200)
-            self.added_curves.append(self.signal)
-            
-            
+            # current start of the first signal in the graph
+            pen = pg.mkPen((0, 255, 0))
+            start_ind = self.signals[self.current_signal_info[0]][0][1]
+            # current end of the first signal in the graph
+            end_ind = self.signals[self.current_signal_info[0]][0][2]
+            self.signals[self.current_signal_info[0]
+                         ][-1] = [(self.time, self.data), start_ind, end_ind]
+            self.X = self.time[start_ind:end_ind]
+            self.Y = self.data[start_ind:end_ind]
+            curve = self.current_graph.plot(self.X, self.Y, pen=pen)
+            self.signals_lines[self.current_signal_info[0]].append(curve)
 
+        if not self.timer.isActive():
+            self.timer.start(50)
 
     def update_plot_data(self):
-        if len(self.time) > 1:
-            self.sub_time = self.time[:self.data_index + 5]
-            self.sub_data = self.data[:self.data_index + 5]
+        if self.is_all_channels:  # plotting all channels together
+            # start and end indices of the first signal in the graph
+            for i, signal in enumerate(self.signals[self.current_signal_info[0]]):
+                (time, data), start_ind, end_ind = signal
 
-            self.data_index += 5
+                signal_line = self.signals_lines[self.current_signal_info[0]][i]
+                self.X = time[:end_ind + 5]
+                self.Y = data[:end_ind + 5]
+                self.signals[self.current_signal_info[0]][i] = [
+                    (time, data), start_ind, end_ind+5]
+                signal_line.setData(self.X, self.Y)
 
-            self.signal.setData(self.sub_time, self.sub_data)
-
-    def show_error_message(self, message):
-        msg_box = QMessageBox()
-        msg_box.setIcon(QMessageBox.Icon.Critical)
-        msg_box.setWindowTitle("Error")
-        msg_box.setText(message)
-        msg_box.exec()
+        else:
+            pass  # specific channel
 
 
 def main():

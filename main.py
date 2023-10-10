@@ -16,13 +16,19 @@ class MainWindow(QtWidgets.QMainWindow):
         super(MainWindow, self).__init__(*args, **kwargs)
 
         self.signals = {"graph1": [], "graph2": []}
-        # "graph1":[[(time,data),end_index],[the rest of signals in each graph]]
+        # "graph1":[[(time,data),end_index,file_path],[the rest of signals in each graph]]
         self.signals_lines = {"graph1": [], "graph2": []}
+        self.data_index = 50
 
         self.timer = QtCore.QTimer()
         self.timer.setInterval(50)
 
         self.init_ui()
+
+        self.is_playing = True
+
+        self.graph1_signals_paths = []
+        self.graph2_signals_paths = []
 
     def init_ui(self):
         # Load the UI Page
@@ -39,13 +45,101 @@ class MainWindow(QtWidgets.QMainWindow):
         self.importButton.clicked.connect(self.browse)
         self.is_all_channels = True
 
+        self.graphSelection.currentIndexChanged.connect(self.index_changed)
+
+        self.graph_selected_index = self.graphSelection.currentIndex()
+
+        self.playButton.clicked.connect(self.toggle_play_pause)
+
+        self.clearButton.clicked.connect(self.clear_graph)
+
+        self.rewindButton.clicked.connect(self.rewind_graph)
+
+        self.zoomIn.clicked.connect(self.zoom_in)
+
+        self.zoomOut.clicked.connect(self.zoom_out)
+
+        self.original_range = self.graph1.getViewBox().viewRange()
+
+        self.speedSlider.setMinimum(0)
+        self.speedSlider.setMaximum(100)
+        self.speedSlider.setSingleStep(5)
+        self.speedSlider.setValue(self.data_index)
+
+        self.graphSelection.currentIndexChanged.connect(
+            self.update_selected_graph)
+
+        self.current_graph = self.update_selected_graph(
+            self.graphSelection.currentIndex())
+
+    def zoom_in(self):
+        self.graph1.plotItem.getViewBox().scaleBy((0.5, 1))
+
+    def zoom_out(self):
+        self.graph1.plotItem.getViewBox().scaleBy((1.5, 1))
+
+    def initialize_data(self):
+        self.signals = {"graph1": [], "graph2": []}
+        # "graph1":[[(time,data),end_index,file_path],[the rest of signals in each graph]]
+        self.signals_lines = {"graph1": [], "graph2": []}
+
+    def rewind_graph(self):
+        self.initialize_data()
+
+        if (self.current_graph == self.graph1):
+            self.current_graph.clear()
+            for signal_path in self.graph1_signals_paths:
+                self.open_file(signal_path)
+        else:
+            self.current_graph.clear()
+            for signal_path in self.graph2_signals_paths:
+                self.open_file(signal_path)
+
+    # Modify the update_selected_graph method to set the selected graph
+
+    def update_selected_graph(self, index):
+        if index == 0:
+            self.current_graph = self.graph1
+            self.current_signal_info[0] = "graph1"
+        elif index == 1:
+            self.current_graph = self.graph2
+            self.current_signal_info[0] = "graph2"
+
+        return self.current_graph
+
+    def clear_graph(self):
+        self.initialize_data()
+        if (self.current_graph == self.graph1):
+            self.graph1.clear()
+        else:
+            self.graph2.clear()
+
+    def toggle_play_pause(self):
+        if self.is_playing:
+            self.is_playing = False
+            self.playButton.setText('Play')
+        else:
+            self.is_playing = True
+            self.playButton.setText('Pause')
+
+    def index_changed(self, i):
+        self.graph_selected_index = i
+
     def browse(self):
         file_filter = "Raw Data (*.csv *.txt *.xls *.hea *.dat *.rec)"
-        file_path, _ = QtWidgets.QFileDialog.getOpenFileName(
+        self.file_path, _ = QtWidgets.QFileDialog.getOpenFileName(
             None, 'Open Signal File', './', filter=file_filter)
 
-        if file_path:
-            self.open_file(file_path)
+        if self.current_graph == self.graph1:
+
+            self.graph1_signals_paths.append(self.file_path)
+
+        elif self.current_graph == self.graph2:
+
+            self.graph2_signals_paths.append(self.file_path)
+
+        if self.file_path:
+            self.open_file(self.file_path)
 
     def open_file(self, path: str):
         self.time = []
@@ -92,17 +186,23 @@ class MainWindow(QtWidgets.QMainWindow):
         self.X = []
         self.Y = []
         if self.current_graph == self.graph1:
-            self.signals["graph1"].append([(self.time, self.data), 50])
+            self.signals["graph1"].append(
+                [(self.time, self.data), 50])
+
             self.current_signal_info[0] = "graph1"
             self.current_signal_info[1] = len(self.signals["graph1"])-1
         elif self.current_graph == self.graph2:
-            self.signals["graph2"].append([(self.time, self.data), 50])
+            self.signals["graph2"].append(
+                [(self.time, self.data), 50])
+
             self.current_signal_info[0] = "graph2"
             self.current_signal_info[1] = len(self.signals["graph2"])-1
 
+        self.playButton.setText('Pause')
         self.plot_signal()
 
     def plot_signal(self):
+        # print(selected_graph.name)
         if self.current_signal_info[-1] == 0:  # first plot in the graph
             pen = pg.mkPen((255, 0, 0))
             self.X = self.time[:50]
@@ -126,21 +226,21 @@ class MainWindow(QtWidgets.QMainWindow):
         if not self.timer.isActive():
             self.timer.start(50)
 
+        if not self.timer.isActive():
+            self.timer.start(50)
+
     def update_plot_data(self):
-        if self.is_all_channels:  # plotting all channels together
-            # start and end indices of the first signal in the graph
-            for i, signal in enumerate(self.signals[self.current_signal_info[0]]):
-                (time, data), end_ind = signal
+        if self.is_playing:
+            for graph_key in ["graph1", "graph2"]:
+                for i, signal in enumerate(self.signals[graph_key]):
+                    (time, data) = signal[0]
+                    end_ind = signal[1]
 
-                signal_line = self.signals_lines[self.current_signal_info[0]][i]
-                self.X = time[:end_ind + 5]
-                self.Y = data[:end_ind + 5]
-                self.signals[self.current_signal_info[0]][i] = [
-                    (time, data), end_ind+5]
-                signal_line.setData(self.X, self.Y)
-
-        else:
-            pass  # specific channel
+                    signal_line = self.signals_lines[graph_key][i]
+                    self.X = time[:end_ind + 5]
+                    self.Y = data[:end_ind + 5]
+                    self.signals[graph_key][i] = [(time, data), end_ind + 5]
+                    signal_line.setData(self.X, self.Y)
 
 
 def main():

@@ -314,7 +314,7 @@ color: #fff;</string>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_8">
            <item>
-            <widget class="QSlider" name="verticalSlider_3">
+            <widget class="QSlider" name="verticalSliderGraph1">
              <property name="styleSheet">
               <string notr="true">/* Style for the QSlider (Vertical) */
 QSlider::groove:vertical {
@@ -352,7 +352,7 @@ QSlider::handle:vertical:pressed {
           </layout>
          </item>
          <item>
-          <widget class="QSlider" name="horizontalSlider_5">
+          <widget class="QSlider" name="horizontalSliderGraph1">
            <property name="styleSheet">
             <string notr="true">/* Style for the QSlider */
 
@@ -855,7 +855,7 @@ color: #fff;</string>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
-            <widget class="QSlider" name="verticalSlider_2">
+            <widget class="QSlider" name="verticalSliderGraph2">
              <property name="styleSheet">
               <string notr="true">/* Style for the QSlider (Vertical) */
 QSlider::groove:vertical {
@@ -893,7 +893,7 @@ QSlider::handle:vertical:pressed {
           </layout>
          </item>
          <item>
-          <widget class="QSlider" name="horizontalSlider_4">
+          <widget class="QSlider" name="horizontalSliderGraph2">
            <property name="styleSheet">
             <string notr="true">/* Style for the QSlider */
 
@@ -1861,7 +1861,7 @@ QSlider::handle:pressed {
      <x>0</x>
      <y>0</y>
      <width>1314</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

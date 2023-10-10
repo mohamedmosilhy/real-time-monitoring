@@ -18,14 +18,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.signals = {"graph1": [], "graph2": []}
         # "graph1":[[(time,data),end_index,file_path],[the rest of signals in each graph]]
         self.signals_lines = {"graph1": [], "graph2": []}
-        self.data_index = 50
+        self.data_index = 10
 
         self.timer = QtCore.QTimer()
         self.timer.setInterval(50)
 
         self.init_ui()
 
-        self.is_playing = True
+        self.is_playing = [{"graph": "graph1", "is_playing": True}, {
+            "graph": "graph2", "is_playing": True}]
 
         self.graph1_signals_paths = []
         self.graph2_signals_paths = []
@@ -39,7 +40,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.current_graph.setLabel("bottom", "Time")
         self.current_graph.setLabel("left", "Amplitude")
-        self.current_graph.showGrid(x=True, y=True)
+        self.graph1.showGrid(x=True, y=True)
+        self.graph2.showGrid(x=True, y=True)
 
         self.timer.timeout.connect(self.update_plot_data)
         self.importButton.clicked.connect(self.browse)
@@ -65,6 +67,44 @@ class MainWindow(QtWidgets.QMainWindow):
         self.speedSlider.setMaximum(100)
         self.speedSlider.setSingleStep(5)
         self.speedSlider.setValue(self.data_index)
+        self.speedSlider.valueChanged.connect(self.change_speed)
+
+        self.addLabelGraph1.returnPressed.connect(self.EditLabelFunction_1)
+
+        self.addLabelGraph2.returnPressed.connect(self.EditLabelFunction_2)
+
+        self.colorButtonGraph1.clicked.connect(self.change_plot_color_1)
+
+        self.colorButtonGraph2.clicked.connect(self.change_plot_color_2)
+
+        # self.verticalSliderGraph2.setMinimum(0)
+        # self.verticalSliderGraph2.setMaximum(100)
+        # self.verticalSliderGraph2.setSingleStep(5)
+        # self.verticalSliderGraph2.setValue(self.data_index)
+        # self.verticalSliderGraph2.valueChanged.connect(self.change_speed)
+
+        # self.verticalSliderGraph1.setMinimum(0)
+        # self.verticalSliderGraph1.setMaximum(100)
+        # self.verticalSliderGraph1.setSingleStep(5)
+        # self.verticalSliderGraph1.setValue(self.data_index)
+        # self.verticalSliderGraph1.valueChanged.connect(self.change_speed)
+
+        # self.horizontalSliderGraph1.setMinimum(0)
+        # self.horizontalSliderGraph1.setMaximum(100)
+        # self.horizontalSliderGraph1.setSingleStep(5)
+        # self.horizontalSliderGraph1.setValue(self.data_index)
+        # self.horizontalSliderGraph1.valueChanged.connect(self.change_speed)
+
+        # self.horizontalSliderGraph2.setMinimum(0)
+        # self.horizontalSliderGraph2.setMaximum(100)
+        # self.horizontalSliderGraph2.setSingleStep(5)
+        # self.horizontalSliderGraph2.setValue(self.data_index)
+        # self.horizontalSliderGraph2.valueChanged.connect(self.change_speed)
+
+        # Connect the sceneClicked signal to the custom function
+        # self.graph1.scene().sigMouseClicked.connect(self.mouse_clicked)
+
+        # self.graph2.scene().sigMouseClicked.connect(self.mouse_clicked)
 
         self.graphSelection.currentIndexChanged.connect(
             self.update_selected_graph)
@@ -72,19 +112,54 @@ class MainWindow(QtWidgets.QMainWindow):
         self.current_graph = self.update_selected_graph(
             self.graphSelection.currentIndex())
 
-    def zoom_in(self):
-        self.graph1.plotItem.getViewBox().scaleBy((0.5, 1))
+    # def mouse_clicked(self, event):
+    #     # Get the coordinates of the clicked point
+    #     pos = event.pos()
+    #     # Map the pixel coordinates to view coordinates
+    #     view_pos = self.graph1.plotItem.vb.mapSceneToView(pos)
+    #     # Extract x and y coordinates
+    #     x, y = view_pos.x(), view_pos.y()
 
-    def zoom_out(self):
-        self.graph1.plotItem.getViewBox().scaleBy((1.5, 1))
+    #     # Check if the clicked point is within the visible axis range
+    #     x_min, x_max, y_min, y_max = self.graph1.viewRange()
 
-    def initialize_data(self):
-        self.signals = {"graph1": [], "graph2": []}
-        # "graph1":[[(time,data),end_index,file_path],[the rest of signals in each graph]]
-        self.signals_lines = {"graph1": [], "graph2": []}
+    #     if x_min <= x <= x_max and y_min <= y <= y_max:
+    #         # Perform zoom operations only if the clicked point is within the visible axis range
+    #         # Implement this function similarly to the previous example
+    #         self.zoom_in(x, y)
+    #         # OR
+    #         # self.zoom_out(x, y)  # If you want to zoom out, implement the zoom_out function
+
+    def change_speed(self):
+        self.data_index = self.speedSlider.value()
+
+    def zoom_in(self, center_x, center_y):
+        # Scale the viewbox around the specified center point
+        view_box = self.graph1.plotItem.getViewBox()
+        view_box.scaleBy((0.5, 1), center=(center_x, center_y))
+
+    def zoom_out(self, center_x, center_y):
+        # Scale the viewbox around the specified center point
+        view_box = self.graph1.plotItem.getViewBox()
+        view_box.scaleBy((1.5, 1), center=(center_x, center_y))
+
+    def initialize_data(self, *args):
+        if args == "all":
+            self.signals = {"graph1": [], "graph2": []}
+            # "graph1":[[(time,data),end_index,file_path],[the rest of signals in each graph]]
+            self.signals_lines = {"graph1": [], "graph2": []}
+        else:
+            if (self.current_graph == self.graph1):
+                self.signals["graph1"] = []
+                # "graph1":[[(time,data),end_index,file_path],[the rest of signals in each graph]]
+                self.signals_lines["graph1"] = []
+            else:
+                self.signals["graph2"] = []
+                # "graph1":[[(time,data),end_index,file_path],[the rest of signals in each graph]]
+                self.signals_lines["graph2"] = []
 
     def rewind_graph(self):
-        self.initialize_data()
+        self.initialize_data("all")
 
         if (self.current_graph == self.graph1):
             self.current_graph.clear()
@@ -113,14 +188,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.graph1.clear()
         else:
             self.graph2.clear()
-
-    def toggle_play_pause(self):
-        if self.is_playing:
-            self.is_playing = False
-            self.playButton.setText('Play')
-        else:
-            self.is_playing = True
-            self.playButton.setText('Pause')
 
     def index_changed(self, i):
         self.graph_selected_index = i
@@ -229,18 +296,95 @@ class MainWindow(QtWidgets.QMainWindow):
         if not self.timer.isActive():
             self.timer.start(50)
 
-    def update_plot_data(self):
-        if self.is_playing:
-            for graph_key in ["graph1", "graph2"]:
-                for i, signal in enumerate(self.signals[graph_key]):
-                    (time, data) = signal[0]
-                    end_ind = signal[1]
+    def toggle_play_pause(self):
+        for item in self.is_playing:
+            if item["is_playing"]:
+                item["is_playing"] = False
+                self.playButton.setText('Play')
+            else:
+                item["is_playing"] = True
+                self.playButton.setText('Pause')
 
-                    signal_line = self.signals_lines[graph_key][i]
-                    self.X = time[:end_ind + 5]
-                    self.Y = data[:end_ind + 5]
-                    self.signals[graph_key][i] = [(time, data), end_ind + 5]
-                    signal_line.setData(self.X, self.Y)
+    def update_plot_data(self):
+        for item in self.is_playing:
+            if item["is_playing"]:
+                self.updating_graphs([item["graph"]])
+
+    def updating_graphs(self, what_to_update):
+        for graph_key in what_to_update:
+            for i, signal in enumerate(self.signals[graph_key]):
+                (time, data) = signal[0]
+                end_ind = signal[1]
+
+                signal_line = self.signals_lines[graph_key][i]
+                self.X = time[:end_ind + self.data_index]
+                self.Y = data[:end_ind + self.data_index]
+                self.signals[graph_key][i] = [
+                    (time, data), end_ind + self.data_index]
+                signal_line.setData(self.X, self.Y)
+
+    def EditLabelFunction_1(self):
+
+        # Get the text from the QLineEdit
+        legend_text_1 = self.addLabelGraph1.text()
+
+        # Remove the existing legend
+        if self.graph1.plotItem.legend is not None:
+            self.graph1.plotItem.legend.clear()
+
+        # Add a new legend to graph1
+        self.graph1.addLegend()
+
+        # Plot with the specified legend text
+        self.graph1.plot(name=legend_text_1)
+
+        self.addLabelGraph1.clear()
+
+    def EditLabelFunction_2(self):
+        # Get the text from the QLineEdit
+        legend_text_2 = self.addLabelGraph2.text()
+
+        # Check if a legend exists on graph2 and remove it
+        if self.graph2.plotItem.legend is not None:
+            self.graph2.plotItem.legend.clear()
+
+        # Add a new legend to graph2
+        self.graph2.addLegend()
+
+        # Plot with the specified legend text
+        self.graph2.plot(name=legend_text_2)
+
+        self.addLabelGraph2.clear()
+
+    def change_plot_color_1(self):
+        # Open a QColorDialog to select a new color
+        color = QtWidgets.QColorDialog.getColor()
+
+        if color.isValid():
+            # Convert the QColor to a tuple of RGB values
+            rgb = (color.red(), color.green(), color.blue())
+
+            # Set the plot color using pg.mkPen
+            pen = pg.mkPen(color=rgb)
+
+            # Apply the new color to the current plot
+            for curve in self.signals_lines[self.current_signal_info[0]]:
+                curve.setPen(pen)
+
+    def change_plot_color_2(self):
+        # Open a QColorDialog to select a new color
+        color = QtWidgets.QColorDialog.getColor()
+
+        if color.isValid():
+            # Convert the QColor to a tuple of RGB values
+            rgb = (color.red(), color.green(), color.blue())
+
+            # Set the plot color using pg.mkPen
+            pen = pg.mkPen(color=rgb)
+
+            # Apply the new color to the current plot
+            for curve in self.signals_lines[self.current_signal_info[0]]:
+                curve.setPen(pen)
 
 
 def main():

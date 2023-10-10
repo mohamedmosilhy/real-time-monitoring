@@ -16,7 +16,7 @@ class MainWindow(QtWidgets.QMainWindow):
         super(MainWindow, self).__init__(*args, **kwargs)
 
         self.signals = {"graph1": [], "graph2": []}
-        # "graph1":[[(time,data),start_index,end_index],[the rest of signals in each graph]]
+        # "graph1":[[(time,data),end_index],[the rest of signals in each graph]]
         self.signals_lines = {"graph1": [], "graph2": []}
 
         self.timer = QtCore.QTimer()
@@ -92,11 +92,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.X = []
         self.Y = []
         if self.current_graph == self.graph1:
-            self.signals["graph1"].append([(self.time, self.data), 0, 50])
+            self.signals["graph1"].append([(self.time, self.data), 50])
             self.current_signal_info[0] = "graph1"
             self.current_signal_info[1] = len(self.signals["graph1"])-1
         elif self.current_graph == self.graph2:
-            self.signals["graph2"].append([(self.time, self.data), 0, 50])
+            self.signals["graph2"].append([(self.time, self.data), 50])
             self.current_signal_info[0] = "graph2"
             self.current_signal_info[1] = len(self.signals["graph2"])-1
 
@@ -114,13 +114,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
             # current start of the first signal in the graph
             pen = pg.mkPen((0, 255, 0))
-            start_ind = self.signals[self.current_signal_info[0]][0][1]
             # current end of the first signal in the graph
-            end_ind = self.signals[self.current_signal_info[0]][0][2]
+            end_ind = self.signals[self.current_signal_info[0]][0][1]
             self.signals[self.current_signal_info[0]
-                         ][-1] = [(self.time, self.data), start_ind, end_ind]
-            self.X = self.time[start_ind:end_ind]
-            self.Y = self.data[start_ind:end_ind]
+                         ][-1] = [(self.time, self.data), end_ind]
+            self.X = self.time[:end_ind]
+            self.Y = self.data[:end_ind]
             curve = self.current_graph.plot(self.X, self.Y, pen=pen)
             self.signals_lines[self.current_signal_info[0]].append(curve)
 
@@ -131,13 +130,13 @@ class MainWindow(QtWidgets.QMainWindow):
         if self.is_all_channels:  # plotting all channels together
             # start and end indices of the first signal in the graph
             for i, signal in enumerate(self.signals[self.current_signal_info[0]]):
-                (time, data), start_ind, end_ind = signal
+                (time, data), end_ind = signal
 
                 signal_line = self.signals_lines[self.current_signal_info[0]][i]
                 self.X = time[:end_ind + 5]
                 self.Y = data[:end_ind + 5]
                 self.signals[self.current_signal_info[0]][i] = [
-                    (time, data), start_ind, end_ind+5]
+                    (time, data), end_ind+5]
                 signal_line.setData(self.X, self.Y)
 
         else:

@@ -14,7 +14,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
-        self.current_signal_info = ["graph2", None]  # [graph_name,plot_index]
+
         self.signals = {"graph1": [], "graph2": []}
         # "graph1":[[(time,data),start_index,end_index],[the rest of signals in each graph]]
         self.signals_lines = {"graph1": [], "graph2": []}
@@ -28,6 +28,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Load the UI Page
         self.ui = uic.loadUi('mainwindow.ui', self)
         self.current_graph = self.graph2  # default value
+        self.current_signal_info = ["graph2", None]  # [graph_name,plot_index]
         self.current_graph.clear()
 
         self.current_graph.setLabel("bottom", "Time")
@@ -36,11 +37,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.timer.timeout.connect(self.update_plot_data)
         self.importButton.clicked.connect(self.browse)
-        # Add "All channels" to the combo box
-        # self.channelsGraph1.currentIndexChanged.connect(
-        #     self.ch_combobox_activated)
-        # self.channelsGraph1.addItem('All channels')
-        # self.colorButtonGraph1.connect(self.pick_channel_color)
         self.is_all_channels = True
 
     def browse(self):
@@ -115,13 +111,14 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.X, self.Y, pen=pen)
             self.signals_lines[self.current_signal_info[0]].append(curve)
         else:  # other plots in the graph have been added
+
             # current start of the first signal in the graph
             pen = pg.mkPen((0, 255, 0))
             start_ind = self.signals[self.current_signal_info[0]][0][1]
             # current end of the first signal in the graph
             end_ind = self.signals[self.current_signal_info[0]][0][2]
             self.signals[self.current_signal_info[0]
-                         ][-1] = [self.current_signal_info[0], start_ind, end_ind]
+                         ][-1] = [(self.time, self.data), start_ind, end_ind]
             self.X = self.time[start_ind:end_ind]
             self.Y = self.data[start_ind:end_ind]
             curve = self.current_graph.plot(self.X, self.Y, pen=pen)
@@ -130,62 +127,21 @@ class MainWindow(QtWidgets.QMainWindow):
         if not self.timer.isActive():
             self.timer.start(50)
 
-    # def update_plot_data(self):
-    #     if len(self.time) > 1:
-    #         if self.data_index >= len(self.time)-1:
-    #             # self.signal.setData(self.time, self.data)
-    #             self.signal.setData(self.X, self.Y)
-
-    #         elif self.data_index >= len(self.time)/4:
-    #             self.X = self.time[self.startIndex + 5:self.data_index + 5]
-    #             self.Y = self.data[self.startIndex + 5:self.data_index + 5]
-    #             self.startIndex += 5
-    #             self.data_index += 5
-    #             self.signal.setData(self.X, self.Y)
-
-    #         else:
-    #             self.X = self.time[:self.data_index + 5]
-    #             self.Y = self.data[:self.data_index + 5]
-    #             self.data_index += 5
-    #             self.signal.setData(self.X, self.Y)
-
     def update_plot_data(self):
         if self.is_all_channels:  # plotting all channels together
             # start and end indices of the first signal in the graph
             for i, signal in enumerate(self.signals[self.current_signal_info[0]]):
-                first_signal = self.signals[self.current_signal_info[0]][0]
-                start_ind = first_signal[1]
-                end_ind = first_signal[2]
-                (time, data) = signal[0]  # tuple (time,data)
-                if len(time) > 1:
-                    signal_line = self.signals_lines[self.current_signal_info[0]][i]
+                (time, data), start_ind, end_ind = signal
 
-                    if end_ind >= len(time) - 1:
-                        signal_line.setData(self.X, self.Y)
-
-                    elif end_ind >= len(time)/4:
-                        self.X = time[start_ind + 5:end_ind + 5]
-                        self.Y = data[start_ind + 5:end_ind + 5]
-                        self.signals[self.current_signal_info[0]][0] = [
-                            first_signal[0], first_signal[1] + 5, first_signal[2] + 5]
-                        signal_line.setData(self.X, self.Y)
-
-                    else:
-                        self.X = time[:end_ind + 5]
-                        self.Y = data[:end_ind + 5]
-                        self.signals[self.current_signal_info[0]][0] = [
-                            first_signal[0], first_signal[1], first_signal[2]+5]
-                        signal_line.setData(self.X, self.Y)
+                signal_line = self.signals_lines[self.current_signal_info[0]][i]
+                self.X = time[:end_ind + 5]
+                self.Y = data[:end_ind + 5]
+                self.signals[self.current_signal_info[0]][i] = [
+                    (time, data), start_ind, end_ind+5]
+                signal_line.setData(self.X, self.Y)
 
         else:
             pass  # specific channel
-
-    def show_error_message(self, message):
-        msg_box = QMessageBox()
-        msg_box.setIcon(QMessageBox.Icon.Critical)
-        msg_box.setWindowTitle("Error")
-        msg_box.setText(message)
-        msg_box.exec()
 
 
 def main():

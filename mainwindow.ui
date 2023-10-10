@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1311</width>
+    <width>1314</width>
     <height>826</height>
    </rect>
   </property>
@@ -82,7 +82,7 @@
           <string>Open File</string>
          </property>
          <property name="icon">
-          <iconset resource="resourrces.qrc">
+          <iconset>
            <normaloff>Icons/upload-.svg</normaloff>Icons/upload-.svg</iconset>
          </property>
          <property name="iconSize">
@@ -137,7 +137,7 @@
           <string>PDF Report</string>
          </property>
          <property name="icon">
-          <iconset resource="resourrces.qrc">
+          <iconset>
            <normaloff>Icons/book-2-svgrepo-com.svg</normaloff>Icons/book-2-svgrepo-com.svg</iconset>
          </property>
          <property name="iconSize">
@@ -192,7 +192,7 @@
           <string>Save</string>
          </property>
          <property name="icon">
-          <iconset resource="resourrces.qrc">
+          <iconset>
            <normaloff>Icons/save.png</normaloff>Icons/save.png</iconset>
          </property>
          <property name="iconSize">
@@ -570,7 +570,7 @@ width: 100%; /* Reduced width to 200 pixels */
               <string>Delete</string>
              </property>
              <property name="icon">
-              <iconset resource="resourrces.qrc">
+              <iconset>
                <normaloff>Icons/delete-svgrepo-com.svg</normaloff>Icons/delete-svgrepo-com.svg</iconset>
              </property>
              <property name="iconSize">
@@ -644,7 +644,7 @@ width: 100%; /* Reduced width to 200 pixels */
               <string> Color</string>
              </property>
              <property name="icon">
-              <iconset resource="resourrces.qrc">
+              <iconset>
                <normaloff>Icons/color-palette-svgrepo-com.svg</normaloff>Icons/color-palette-svgrepo-com.svg</iconset>
              </property>
              <property name="iconSize">
@@ -796,7 +796,7 @@ QCheckBox::indicator::checked {
             <string>Link</string>
            </property>
            <property name="icon">
-            <iconset resource="resourrces.qrc">
+            <iconset>
              <normaloff>Icons/link-square-svgrepo-com.svg</normaloff>Icons/link-square-svgrepo-com.svg</iconset>
            </property>
            <property name="iconSize">
@@ -1099,7 +1099,7 @@ width: 100%; /* Reduced width to 200 pixels */
               <string>Delete</string>
              </property>
              <property name="icon">
-              <iconset resource="resourrces.qrc">
+              <iconset>
                <normaloff>Icons/delete-svgrepo-com.svg</normaloff>Icons/delete-svgrepo-com.svg</iconset>
              </property>
              <property name="iconSize">
@@ -1151,7 +1151,7 @@ width: 100%; /* Reduced width to 200 pixels */
               <string> Color</string>
              </property>
              <property name="icon">
-              <iconset resource="resourrces.qrc">
+              <iconset>
                <normaloff>Icons/color-palette-svgrepo-com.svg</normaloff>Icons/color-palette-svgrepo-com.svg</iconset>
              </property>
              <property name="iconSize">
@@ -1500,7 +1500,7 @@ color: #fff;</string>
           <string>Play</string>
          </property>
          <property name="icon">
-          <iconset resource="resourrces.qrc">
+          <iconset>
            <normaloff>Icons/play-svgrepo-com.svg</normaloff>Icons/play-svgrepo-com.svg</iconset>
          </property>
          <property name="iconSize">
@@ -1555,7 +1555,7 @@ color: #fff;</string>
           <string>Rewind</string>
          </property>
          <property name="icon">
-          <iconset resource="resourrces.qrc">
+          <iconset>
            <normaloff>Icons/rewind-forward-svgrepo-com.svg</normaloff>Icons/rewind-forward-svgrepo-com.svg</iconset>
          </property>
          <property name="iconSize">
@@ -1610,7 +1610,7 @@ color: #fff;</string>
           <string>Clear</string>
          </property>
          <property name="icon">
-          <iconset resource="resourrces.qrc">
+          <iconset>
            <normaloff>Icons/clear-svgrepo-com.svg</normaloff>Icons/clear-svgrepo-com.svg</iconset>
          </property>
          <property name="iconSize">
@@ -1656,66 +1656,53 @@ color: #fff;</string>
           <number>2</number>
          </property>
          <item>
-          <widget class="QLabel" name="zoomXLable">
+          <widget class="QPushButton" name="zoomIn">
            <property name="font">
             <font>
-             <family>Gabarito</family>
-             <pointsize>-1</pointsize>
+             <family>-apple-system</family>
+             <pointsize>14</pointsize>
              <bold>true</bold>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">font-family: 'Gabarito', cursive;
-font-size: 20px;
-font-weight: 900px;
-color: #fff;</string>
-           </property>
-           <property name="text">
-            <string>Zoom - X</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSlider" name="zoomXSlider">
-           <property name="styleSheet">
-            <string notr="true">/* Style for the QSlider */
+            <string notr="true">
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
+  font-size: 100%;
+  height: 44px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
 
-/* Background of the slider track */
-QSlider {
-    background-color: transparent;
-    height: 10px; /* Set the height of the track */
-}
-
-/* Style for the groove (track) */
-QSlider::groove {
-    background: #fff; /* Color of the track */
-    border: 1px solid #999; /* Border of the track */
-    height: 10px; /* Set the height of the track */
-    border-radius: 5px; /* Round the corners of the track */
-}
-
-/* Style for the slider handle (thumb) */
-QSlider::handle {
-    background: #FF4742; /* Color of the handle */
-    border: 1px solid ; /* Border of the handle */
-    width: 20px; /* Width of the handle */
-    height: 30px; /* Height of the handle */
-    margin: -5px 0; /* Negative margin to center the handle vertically */
-    border-radius: 10px; /* Round the corners of the handle */
-}
-
-/* Style for the slider handle when pressed */
-QSlider::handle:pressed {
-    background: #FF4742; /* Color of the handle when pressed */
-    border: 1px solid #3498db; /* Border of the handle when pressed */
-}
 </string>
            </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+           <property name="text">
+            <string>Zoom In</string>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
            </property>
           </widget>
          </item>
@@ -1727,65 +1714,53 @@ QSlider::handle:pressed {
           <number>2</number>
          </property>
          <item>
-          <widget class="QLabel" name="zoomYLable">
+          <widget class="QPushButton" name="zoomOut">
            <property name="font">
             <font>
-             <family>Gabarito</family>
-             <pointsize>-1</pointsize>
+             <family>-apple-system</family>
+             <pointsize>14</pointsize>
              <bold>true</bold>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">font-family: 'Gabarito', cursive;
-font-size: 20px;
-color: #fff;</string>
-           </property>
-           <property name="text">
-            <string>Zoom - Y</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSlider" name="zoomYSlider">
-           <property name="styleSheet">
-            <string notr="true">/* Style for the QSlider */
+            <string notr="true">
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
+  font-size: 100%;
+  height: 44px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 15px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
 
-/* Background of the slider track */
-QSlider {
-    background-color: transparent;
-    height: 10px; /* Set the height of the track */
-}
-
-/* Style for the groove (track) */
-QSlider::groove {
-    background: #fff; /* Color of the track */
-    border: 1px solid #999; /* Border of the track */
-    height: 10px; /* Set the height of the track */
-    border-radius: 5px; /* Round the corners of the track */
-}
-
-/* Style for the slider handle (thumb) */
-QSlider::handle {
-    background: #FF4742; /* Color of the handle */
-    border: 1px solid ; /* Border of the handle */
-    width: 20px; /* Width of the handle */
-    height: 30px; /* Height of the handle */
-    margin: -5px 0; /* Negative margin to center the handle vertically */
-    border-radius: 10px; /* Round the corners of the handle */
-}
-
-/* Style for the slider handle when pressed */
-QSlider::handle:pressed {
-    background: #FF4742; /* Color of the handle when pressed */
-    border: 1px solid #3498db; /* Border of the handle when pressed */
-}
 </string>
            </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+           <property name="text">
+            <string>Zoom Out</string>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
            </property>
           </widget>
          </item>
@@ -1885,8 +1860,8 @@ QSlider::handle:pressed {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1311</width>
-     <height>26</height>
+     <width>1314</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>

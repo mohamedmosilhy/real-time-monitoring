@@ -1410,6 +1410,11 @@ color: #fff;</string>
              <string>Graph2</string>
             </property>
            </item>
+           <item>
+            <property name="text">
+             <string>Linked</string>
+            </property>
+           </item>
           </widget>
          </item>
          <item>
@@ -1861,7 +1866,7 @@ QSlider::handle:pressed {
      <x>0</x>
      <y>0</y>
      <width>1314</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

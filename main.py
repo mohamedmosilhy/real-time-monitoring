@@ -16,9 +16,11 @@ class MainWindow(QtWidgets.QMainWindow):
         super(MainWindow, self).__init__(*args, **kwargs)
 
         self.signals = {"graph1": [], "graph2": []}
-        # "graph1":[[(time,data),end_index,file_path],[the rest of signals in each graph]]
+        # "graph1":[[(time,data),end_index]] Each list in the nested lists represent a signal
+        # contain the line plots for each graph ordered by insertion
         self.signals_lines = {"graph1": [], "graph2": []}
         self.data_index = 10
+        self.sourceGraph = "both"  # flag for link mode
 
         self.timer = QtCore.QTimer()
         self.timer.setInterval(50)
@@ -34,24 +36,27 @@ class MainWindow(QtWidgets.QMainWindow):
     def init_ui(self):
         # Load the UI Page
         self.ui = uic.loadUi('mainwindow.ui', self)
-        self.current_graph = self.graph2  # default value
-        self.current_signal_info = ["graph2", None]  # [graph_name,plot_index]
+        self.lookup = {"graph1": self.graph1, "graph2": self.graph2}
+        self.current_graph = self.graph1  # default value
         self.current_graph.clear()
 
-        self.current_graph.setLabel("bottom", "Time")
-        self.current_graph.setLabel("left", "Amplitude")
+        self.graph1.setLabel("bottom", "Time")
+        self.graph1.setLabel("left", "Amplitude")
+        self.graph2.setLabel("bottom", "Time")
+        self.graph2.setLabel("left", "Amplitude")
         self.graph1.showGrid(x=True, y=True)
         self.graph2.showGrid(x=True, y=True)
 
         self.timer.timeout.connect(self.update_plot_data)
         self.importButton.clicked.connect(self.browse)
-        self.is_all_channels = True
 
-        self.graphSelection.currentIndexChanged.connect(self.index_changed)
+        # self.graphSelection.currentIndexChanged.connect(self.index_changed)
 
-        self.graph_selected_index = self.graphSelection.currentIndex()
+        # self.graph_selected_index = self.graphSelection.currentIndex()
 
         self.playButton.clicked.connect(self.toggle_play_pause)
+
+        self.linkButton.clicked.connect(self.link_graphs)
 
         self.clearButton.clicked.connect(self.clear_graph)
 
@@ -108,9 +113,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.graphSelection.currentIndexChanged.connect(
             self.update_selected_graph)
-
-        self.current_graph = self.update_selected_graph(
-            self.graphSelection.currentIndex())
+        # self.update_selected_graph(self.graphSelection.currentIndex())
 
     # def mouse_clicked(self, event):
     #     # Get the coordinates of the clicked point
@@ -135,62 +138,106 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def zoom_in(self, center_x, center_y):
         # Scale the viewbox around the specified center point
-        view_box = self.graph1.plotItem.getViewBox()
-        view_box.scaleBy((0.5, 1), center=(center_x, center_y))
+        if (self.current_graph == self.graph1):
+            view_box = self.graph1.plotItem.getViewBox()
+            view_box.scaleBy((0.5, 1), center=(center_x, center_y))
+        elif (self.current_graph == self.graph2):
+            view_box = self.graph2.plotItem.getViewBox()
+            view_box.scaleBy((0.5, 1), center=(center_x, center_y))
+        else:  # link mode
+            for graph in self.current_graph:
+                view_box = graph.plotItem.getViewBox()
+                view_box.scaleBy((0.5, 1), center=(center_x, center_y))
 
     def zoom_out(self, center_x, center_y):
         # Scale the viewbox around the specified center point
-        view_box = self.graph1.plotItem.getViewBox()
-        view_box.scaleBy((1.5, 1), center=(center_x, center_y))
+        if (self.current_graph == self.graph1):
+            view_box = self.graph1.plotItem.getViewBox()
+            view_box.scaleBy((1.5, 1), center=(center_x, center_y))
+        elif (self.current_graph == self.graph2):
+            view_box = self.graph2.plotItem.getViewBox()
+            view_box.scaleBy((1.5, 1), center=(center_x, center_y))
+        else:  # link mode
+            for graph in self.current_graph:
+                view_box = graph.plotItem.getViewBox()
+                view_box.scaleBy((1.5, 1), center=(center_x, center_y))
 
-    def initialize_data(self, *args):
-        if args == "all":
-            self.signals = {"graph1": [], "graph2": []}
-            # "graph1":[[(time,data),end_index,file_path],[the rest of signals in each graph]]
-            self.signals_lines = {"graph1": [], "graph2": []}
+    def initialize_data(self,):
+        if (self.current_graph == self.graph1):
+            self.signals["graph1"] = []
+            self.signals_lines["graph1"] = []
+        elif (self.current_graph == self.graph2):
+            self.signals["graph2"] = []
+            self.signals_lines["graph2"] = []
         else:
-            if (self.current_graph == self.graph1):
-                self.signals["graph1"] = []
-                # "graph1":[[(time,data),end_index,file_path],[the rest of signals in each graph]]
-                self.signals_lines["graph1"] = []
-            else:
-                self.signals["graph2"] = []
-                # "graph1":[[(time,data),end_index,file_path],[the rest of signals in each graph]]
-                self.signals_lines["graph2"] = []
+            self.signals = {"graph1": [], "graph2": []}
+            self.signals_lines = {"graph1": [], "graph2": []}
 
     def rewind_graph(self):
-        self.initialize_data("all")
-
         if (self.current_graph == self.graph1):
+            self.initialize_data()
             self.current_graph.clear()
             for signal_path in self.graph1_signals_paths:
                 self.open_file(signal_path)
-        else:
+        elif (self.current_graph == self.graph2):
+            self.initialize_data()
             self.current_graph.clear()
             for signal_path in self.graph2_signals_paths:
                 self.open_file(signal_path)
+        else:  # link mode
+            self.initialize_data()
+            self.current_graph[0].clear()
+            self.current_graph[1].clear()
+            for signal_path in self.graph1_signals_paths:
+                # so that the plot appears only on its corresponding graph
+                self.sourceGraph = "graph1"
+                self.open_file(signal_path)
+                print(signal_path)
+            for signal_path in self.graph2_signals_paths:
+                self.sourceGraph = "graph2"
+                self.open_file(signal_path)
+                print(signal_path)
+            self.sourceGraph = "both"  # so that the controls apply to both graphs
 
     # Modify the update_selected_graph method to set the selected graph
 
     def update_selected_graph(self, index):
         if index == 0:
             self.current_graph = self.graph1
-            self.current_signal_info[0] = "graph1"
         elif index == 1:
             self.current_graph = self.graph2
-            self.current_signal_info[0] = "graph2"
-
-        return self.current_graph
+        elif index == 2:
+            self.current_graph = [self.graph1, self.graph2]
 
     def clear_graph(self):
-        self.initialize_data()
         if (self.current_graph == self.graph1):
+            self.initialize_data()
             self.graph1.clear()
-        else:
+            self.playButton.setText('Play')
+            self.graph1_signals_paths = []
+
+        elif (self.current_graph == self.graph2):
+            self.initialize_data()
             self.graph2.clear()
+            self.playButton.setText('Play')
+            self.graph2_signals_paths = []
+        else:
+            self.initialize_data()
+            self.graph1.clear()
+            self.graph2.clear()
+            self.playButton.setText('Play')
+            self.graph1_signals_paths = []
+            self.graph2_signals_paths = []
 
     def index_changed(self, i):
         self.graph_selected_index = i
+
+    def link_graphs(self):
+        self.update_selected_graph(2)
+        self.graphSelection.setCurrentIndex(2)
+        for graph in self.is_playing:
+            if graph["is_playing"]:
+                graph["is_playing"] = True
 
     def browse(self):
         file_filter = "Raw Data (*.csv *.txt *.xls *.hea *.dat *.rec)"
@@ -203,6 +250,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
         elif self.current_graph == self.graph2:
 
+            self.graph2_signals_paths.append(self.file_path)
+        else:
+            self.graph1_signals_paths.append(self.file_path)
             self.graph2_signals_paths.append(self.file_path)
 
         if self.file_path:
@@ -252,76 +302,159 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.X = []
         self.Y = []
+
         if self.current_graph == self.graph1:
             self.signals["graph1"].append(
                 [(self.time, self.data), 50])
+            self.is_playing[0]["is_playing"] = True
+            self.playButton.setText('Pause')
+            self.plot_graph_signal()
 
-            self.current_signal_info[0] = "graph1"
-            self.current_signal_info[1] = len(self.signals["graph1"])-1
         elif self.current_graph == self.graph2:
             self.signals["graph2"].append(
                 [(self.time, self.data), 50])
+            self.is_playing[1]["is_playing"] = True
+            self.playButton.setText('Pause')
+            self.plot_graph_signal()
 
-            self.current_signal_info[0] = "graph2"
-            self.current_signal_info[1] = len(self.signals["graph2"])-1
+        else:  # link mode
+            if self.sourceGraph == "both":
+                self.signals["graph1"].append(
+                    [(self.time, self.data), 50])
+                self.is_playing[0]["is_playing"] = True
+                self.signals["graph2"].append(
+                    [(self.time, self.data), 50])
+                self.is_playing[1]["is_playing"] = True
+                self.playButton.setText('Pause')
+                self.plot_common_linked_signal()
 
-        self.playButton.setText('Pause')
-        self.plot_signal()
+            elif self.sourceGraph == "graph1":
+                self.signals["graph1"].append(
+                    [(self.time, self.data), 50])
+                self.is_playing[0]["is_playing"] = True
+                self.playButton.setText('Pause')
+                self.plot_unique_linked_signal()
 
-    def plot_signal(self):
-        # print(selected_graph.name)
-        if self.current_signal_info[-1] == 0:  # first plot in the graph
+            elif self.sourceGraph == "graph2":
+                self.signals["graph2"].append(
+                    [(self.time, self.data), 50])
+                self.is_playing[1]["is_playing"] = True
+                self.playButton.setText('Pause')
+                self.plot_unique_linked_signal()
+
+    def plot_graph_signal(self):
+        if len(self.signals[self.get_graph_name()]) == 1:  # first plot in the graph
             pen = pg.mkPen((255, 0, 0))
             self.X = self.time[:50]
             self.Y = self.data[:50]
             curve = self.current_graph.plot(
                 self.X, self.Y, pen=pen)
-            self.signals_lines[self.current_signal_info[0]].append(curve)
+            self.signals_lines[self.get_graph_name()].append(curve)
         else:  # other plots in the graph have been added
-
-            # current start of the first signal in the graph
             pen = pg.mkPen((0, 255, 0))
-            # current end of the first signal in the graph
-            end_ind = self.signals[self.current_signal_info[0]][0][1]
-            self.signals[self.current_signal_info[0]
-                         ][-1] = [(self.time, self.data), end_ind]
+            end_ind = self.signals[self.get_graph_name()][0][1]
+            self.signals[self.get_graph_name()][-1] = [(self.time,
+                                                        self.data), end_ind]
             self.X = self.time[:end_ind]
             self.Y = self.data[:end_ind]
             curve = self.current_graph.plot(self.X, self.Y, pen=pen)
-            self.signals_lines[self.current_signal_info[0]].append(curve)
+            self.signals_lines[self.get_graph_name()].append(curve)
 
         if not self.timer.isActive():
             self.timer.start(50)
+
+    def plot_common_linked_signal(self):
+        for i, graph_name in enumerate(["graph1", "graph2"]):
+            if len(self.signals[graph_name]) == 1:  # first plot in the graph
+                pen = pg.mkPen((255, 0, 0))
+                self.X = self.time[:50]
+                self.Y = self.data[:50]
+                curve = self.current_graph[i].plot(
+                    self.X, self.Y, pen=pen)
+                self.signals_lines[graph_name].append(curve)
+            else:  # other plots in the graph have been added
+                pen = pg.mkPen((0, 255, 0))
+                # print("Hello")
+                end_ind = self.signals[graph_name][0][1]
+                self.signals[graph_name][-1] = [(self.time,
+                                                 self.data), end_ind]
+                self.X = self.time[:end_ind]
+                self.Y = self.data[:end_ind]
+                curve = self.current_graph[i].plot(self.X, self.Y, pen=pen)
+                self.signals_lines[graph_name].append(curve)
+
+            if not self.timer.isActive():
+                self.timer.start(50)
+
+    def plot_unique_linked_signal(self):
+        if len(self.signals[self.get_graph_name()]) == 1:  # first plot in the graph
+            pen = pg.mkPen((255, 0, 0))
+            self.X = self.time[:50]
+            self.Y = self.data[:50]
+            curve = self.lookup[self.get_graph_name()].plot(
+                self.X, self.Y, pen=pen)
+            self.signals_lines[self.get_graph_name()].append(curve)
+        else:  # other plots in the graph have been added
+            pen = pg.mkPen((0, 255, 0))
+            end_ind = self.signals[self.get_graph_name()][0][1]
+            self.signals[self.get_graph_name()][-1] = [(self.time,
+                                                        self.data), end_ind]
+            self.X = self.time[:end_ind]
+            self.Y = self.data[:end_ind]
+            curve = self.lookup[self.get_graph_name()].plot(
+                self.X, self.Y, pen=pen)
+            self.signals_lines[self.get_graph_name()].append(curve)
 
         if not self.timer.isActive():
             self.timer.start(50)
 
     def toggle_play_pause(self):
-        for item in self.is_playing:
-            if item["is_playing"]:
-                item["is_playing"] = False
+        if self.current_graph == self.graph1:
+            if self.is_playing[0]["is_playing"]:
+                self.is_playing[0]["is_playing"] = False
                 self.playButton.setText('Play')
             else:
-                item["is_playing"] = True
+                self.is_playing[0]["is_playing"] = True
                 self.playButton.setText('Pause')
+        elif self.current_graph == self.graph2:
+            if self.is_playing[1]["is_playing"]:
+                self.is_playing[1]["is_playing"] = False
+                self.playButton.setText('Play')
+            else:
+                self.is_playing[1]["is_playing"] = True
+                self.playButton.setText('Pause')
+        else:
+            for graph in self.is_playing:
+                if graph["is_playing"]:
+                    graph["is_playing"] = False
+                    self.playButton.setText('Play')
+                else:
+                    graph["is_playing"] = True
+                    self.playButton.setText('Pause')
 
     def update_plot_data(self):
         for item in self.is_playing:
             if item["is_playing"]:
-                self.updating_graphs([item["graph"]])
+                self.updating_graphs(item["graph"])
 
-    def updating_graphs(self, what_to_update):
-        for graph_key in what_to_update:
-            for i, signal in enumerate(self.signals[graph_key]):
-                (time, data) = signal[0]
-                end_ind = signal[1]
+    def updating_graphs(self, graph: str):
+        for i, signal in enumerate(self.signals[graph]):
+            (time, data), end_ind = signal
 
-                signal_line = self.signals_lines[graph_key][i]
-                self.X = time[:end_ind + self.data_index]
-                self.Y = data[:end_ind + self.data_index]
-                self.signals[graph_key][i] = [
-                    (time, data), end_ind + self.data_index]
-                signal_line.setData(self.X, self.Y)
+            signal_line = self.signals_lines[graph][i]  # error
+            self.X = time[:end_ind + self.data_index]
+            self.Y = data[:end_ind + self.data_index]
+            self.signals[graph][i] = [
+                (time, data), end_ind + self.data_index]
+            signal_line.setData(self.X, self.Y)
+
+    def get_graph_name(self):
+        if self.current_graph == self.graph1:
+            return "graph1"
+        elif self.current_graph == self.graph2:
+            return "graph2"
+        else:
+            return self.sourceGraph
 
     def EditLabelFunction_1(self):
 

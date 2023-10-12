@@ -10,6 +10,7 @@ import csv
 from fpdf import FPDF
 from pyqtgraph.exporters import ImageExporter
 import os
+import random
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -45,7 +46,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.current_graph = self.graph1  # default value
         self.current_graph.clear()
 
-        # to know the what the channels i selected in each combobox , None will be int
+        # to know what the channels i selected in each combobox , None will be int
         self.channels_selected = {"graph1": None, "graph2": None}
 
         self.graph1.setLabel("bottom", "Time")
@@ -95,19 +96,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.graphSelection.currentIndexChanged.connect(
             self.update_selected_graph)
 
-        self.channelsGraph1.currentIndexChanged.connect(
-            lambda i, graph="graph1": self.change_index(graph, i))
-
-        self.channelsGraph2.currentIndexChanged.connect(
-            lambda i, graph="graph2": self.change_index(graph, i))
-
         self.channelsGraph1.currentIndexChanged.connect(lambda i, graph="graph1":
                                                         self.handle_selected_channels_change(graph, i))
 
-        self.channelsGraph2.currentIndexChanged.connect(lambda i, graph="graph1":
+        self.channelsGraph2.currentIndexChanged.connect(lambda i, graph="graph2":
                                                         self.handle_selected_channels_change(graph, i))
 
     def handle_selected_channels_change(self, graph, i):
+        self.channels_selected[graph] = i
+
         if self.channels_selected[graph] == 0:
             for i in range(len(self.signals_lines[graph])):
                 self.signals_visibility[graph][i] = True
@@ -120,37 +117,34 @@ class MainWindow(QtWidgets.QMainWindow):
                 else:
                     self.signals_visibility[graph][i] = False
 
-    def change_index(self, graph, i):
-        self.channels_selected[graph] = i
-
     def change_speed(self):
         self.data_index = self.speedSlider.value()
 
-    def zoom_in(self, center_x, center_y):
+    def zoom_in(self):
         # Scale the viewbox around the specified center point
         if (self.current_graph == self.graph1):
             view_box = self.graph1.plotItem.getViewBox()
-            view_box.scaleBy((0.5, 1), center=(center_x, center_y))
+            view_box.scaleBy((0.5, 1))
         elif (self.current_graph == self.graph2):
             view_box = self.graph2.plotItem.getViewBox()
-            view_box.scaleBy((0.5, 1), center=(center_x, center_y))
+            view_box.scaleBy((0.5, 1))
         else:  # link mode
             for graph in self.current_graph:
                 view_box = graph.plotItem.getViewBox()
-                view_box.scaleBy((0.5, 1), center=(center_x, center_y))
+                view_box.scaleBy((0.5, 1))
 
-    def zoom_out(self, center_x, center_y):
+    def zoom_out(self):
         # Scale the viewbox around the specified center point
         if (self.current_graph == self.graph1):
             view_box = self.graph1.plotItem.getViewBox()
-            view_box.scaleBy((1.5, 1), center=(center_x, center_y))
+            view_box.scaleBy((1.5, 1))
         elif (self.current_graph == self.graph2):
             view_box = self.graph2.plotItem.getViewBox()
-            view_box.scaleBy((1.5, 1), center=(center_x, center_y))
+            view_box.scaleBy((1.5, 1))
         else:  # link mode
             for graph in self.current_graph:
                 view_box = graph.plotItem.getViewBox()
-                view_box.scaleBy((1.5, 1), center=(center_x, center_y))
+                view_box.scaleBy((1.5, 1))
 
     def initialize_data(self,):
         if (self.current_graph == self.graph1):
@@ -205,12 +199,16 @@ class MainWindow(QtWidgets.QMainWindow):
             self.graph1.clear()
             self.playButton.setText('Play')
             self.graph1_signals_paths = []
+            self.channelsGraph1.clear()
+            self.channelsGraph1.addItem("All Channels")
 
         elif (self.current_graph == self.graph2):
             self.initialize_data()
             self.graph2.clear()
             self.playButton.setText('Play')
             self.graph2_signals_paths = []
+            self.channelsGraph2.clear()
+            self.channelsGraph2.addItem("All Channels")
         else:
             self.initialize_data()
             self.graph1.clear()
@@ -218,6 +216,10 @@ class MainWindow(QtWidgets.QMainWindow):
             self.playButton.setText('Play')
             self.graph1_signals_paths = []
             self.graph2_signals_paths = []
+            self.channelsGraph1.clear()
+            self.channelsGraph2.clear()
+            self.channelsGraph1.addItem("All Channels")
+            self.channelsGraph2.addItem("All Channels")
 
     def link_graphs(self):
         self.update_selected_graph(2)
@@ -235,22 +237,22 @@ class MainWindow(QtWidgets.QMainWindow):
 
             self.graph1_signals_paths.append(self.file_path)
             self.channelsGraph1.addItem(
-                f"Channel{len(self.signals["graph1"]) + 1}")
+                f"Channel{len(self.signals['graph1']) + 1}")
             self.signals_visibility["graph1"].append(True)
 
         elif self.current_graph == self.graph2:
 
             self.graph2_signals_paths.append(self.file_path)
             self.channelsGraph2.addItem(
-                f"Channel{len(self.signals["graph2"]) + 1}")
+                f"Channel{len(self.signals['graph2']) + 1}")
             self.signals_visibility["graph2"].append(True)
         else:
             self.graph1_signals_paths.append(self.file_path)
             self.graph2_signals_paths.append(self.file_path)
             self.channelsGraph1.addItem(
-                f"Channel{len(self.signals["graph1"]) + 1}")
+                f"Channel{len(self.signals['graph1']) + 1}")
             self.channelsGraph1.addItem(
-                f"Channel{len(self.signals["graph2"]) + 1}")
+                f"Channel{len(self.signals['graph2']) + 1}")
             self.signals_visibility["graph1"].append(True)
             self.signals_visibility["graph2"].append(True)
 
@@ -341,16 +343,31 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.playButton.setText('Pause')
                 self.plot_unique_linked_signal()
 
+    def generate_random_color(self):
+        while True:
+            # Generate random RGB values
+            red = random.randint(0, 255)
+            green = random.randint(0, 255)
+            blue = random.randint(0, 255)
+
+            # Calculate brightness using a common formula
+            brightness = (red * 299 + green * 587 + blue * 114) / 1000
+
+            # Check if the color is not too light (adjust the threshold as needed)
+            if brightness > 100:
+                return red, green, blue
+
     def plot_graph_signal(self):
         if len(self.signals[self.get_graph_name()]) == 1:  # first plot in the graph
-            pen = pg.mkPen((255, 0, 0))
+            # Create a pen with the generated color
+            pen = pg.mkPen((self.generate_random_color()))
             self.X = self.time[:50]
             self.Y = self.data[:50]
             curve = self.current_graph.plot(
                 self.X, self.Y, pen=pen)
             self.signals_lines[self.get_graph_name()].append(curve)
         else:  # other plots in the graph have been added
-            pen = pg.mkPen((0, 255, 0))
+            pen = pg.mkPen((self.generate_random_color()))
             end_ind = self.signals[self.get_graph_name()][0][1]
             self.signals[self.get_graph_name()][-1] = [(self.time,
                                                         self.data), end_ind]
@@ -365,14 +382,14 @@ class MainWindow(QtWidgets.QMainWindow):
     def plot_common_linked_signal(self):
         for i, graph_name in enumerate(["graph1", "graph2"]):
             if len(self.signals[graph_name]) == 1:  # first plot in the graph
-                pen = pg.mkPen((255, 0, 0))
+                pen = pg.mkPen((self.generate_random_color()))
                 self.X = self.time[:50]
                 self.Y = self.data[:50]
                 curve = self.current_graph[i].plot(
                     self.X, self.Y, pen=pen)
                 self.signals_lines[graph_name].append(curve)
             else:  # other plots in the graph have been added
-                pen = pg.mkPen((0, 255, 0))
+                pen = pg.mkPen((self.generate_random_color()))
                 # print("Hello")
                 end_ind = self.signals[graph_name][0][1]
                 self.signals[graph_name][-1] = [(self.time,
@@ -387,14 +404,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def plot_unique_linked_signal(self):
         if len(self.signals[self.get_graph_name()]) == 1:  # first plot in the graph
-            pen = pg.mkPen((255, 0, 0))
+            pen = pg.mkPen((self.generate_random_color()))
             self.X = self.time[:50]
             self.Y = self.data[:50]
             curve = self.lookup[self.get_graph_name()].plot(
                 self.X, self.Y, pen=pen)
             self.signals_lines[self.get_graph_name()].append(curve)
         else:  # other plots in the graph have been added
-            pen = pg.mkPen((0, 255, 0))
+            pen = pg.mkPen((self.generate_random_color()))
             end_ind = self.signals[self.get_graph_name()][0][1]
             self.signals[self.get_graph_name()][-1] = [(self.time,
                                                         self.data), end_ind]

@@ -1,2 +1,0 @@
-creat a snapshoot button based on current graph
-create in it a nested list that contains tuple(time, data) and image object

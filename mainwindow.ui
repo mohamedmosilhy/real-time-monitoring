@@ -272,84 +272,9 @@ color: #fff;</string>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_8">
            <item>
-            <widget class="QSlider" name="verticalSliderGraph1">
-             <property name="styleSheet">
-              <string notr="true">/* Style for the QSlider (Vertical) */
-QSlider::groove:vertical {
-    background: #fff; /* Color of the track */
-    border: 1px solid #999; /* Border of the track */
-    width: 10px; /* Set the width of the track */
-    border-radius: 5px; /* Round the corners of the track */
-}
-
-/* Style for the slider handle (thumb) on a vertical slider */
-QSlider::handle:vertical {
-    background: #FF4742; /* Color of the handle */
-    border: 1px solid; /* Border of the handle */
-    width: 30px; /* Width of the handle */
-    height: 20px; /* Height of the handle */
-    margin: 0 -5px; /* Negative margin to center the handle horizontally */
-    border-radius: 10px; /* Round the corners of the handle */
-}
-
-/* Style for the slider handle when pressed on a vertical slider */
-QSlider::handle:vertical:pressed {
-    background: #FF4742; /* Color of the handle when pressed */
-    border: 1px solid #3498db; /* Border of the handle when pressed */
-}
-</string>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
             <widget class="PlotWidget" name="graph1" native="true"/>
            </item>
           </layout>
-         </item>
-         <item>
-          <widget class="QSlider" name="horizontalSliderGraph1">
-           <property name="styleSheet">
-            <string notr="true">/* Style for the QSlider */
-
-/* Background of the slider track */
-QSlider {
-    background-color: transparent;
-    height: 10px; /* Set the height of the track */
-
-}
-
-/* Style for the groove (track) */
-QSlider::groove {
-    background: #595a5c; /* Color of the track */
-    border: 0px solid #999; /* Border of the track */
-    height: 5px; /* Set the height of the track */
-    border-radius: 2px; /* Round the corners of the track */
-}
-
-/* Style for the slider handle (thumb) */
-QSlider::handle {
-    background: #FF4742; /* Color of the handle */
-    border: 1px solid ; /* Border of the handle */
-    width: 20px; /* Width of the handle */
-    height: 30px; /* Height of the handle */
-    margin: -5px 0; /* Negative margin to center the handle vertically */
-    border-radius: 2px; /* Round the corners of the handle */
-}
-
-/* Style for the slider handle when pressed */
-QSlider::handle:pressed {
-    background: #FF4742; /* Color of the handle when pressed */
-    border: 1px solid #3498db; /* Border of the handle when pressed */
-}
-</string>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="0,0,0,0,0,0">
@@ -832,84 +757,9 @@ color: #fff;</string>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
-            <widget class="QSlider" name="verticalSliderGraph2">
-             <property name="styleSheet">
-              <string notr="true">/* Style for the QSlider (Vertical) */
-QSlider::groove:vertical {
-    background: #fff; /* Color of the track */
-    border: 1px solid #999; /* Border of the track */
-    width: 10px; /* Set the width of the track */
-    border-radius: 5px; /* Round the corners of the track */
-}
-
-/* Style for the slider handle (thumb) on a vertical slider */
-QSlider::handle:vertical {
-    background: #FF4742; /* Color of the handle */
-    border: 1px solid; /* Border of the handle */
-    width: 30px; /* Width of the handle */
-    height: 20px; /* Height of the handle */
-    margin: 0 -5px; /* Negative margin to center the handle horizontally */
-    border-radius: 10px; /* Round the corners of the handle */
-}
-
-/* Style for the slider handle when pressed on a vertical slider */
-QSlider::handle:vertical:pressed {
-    background: #FF4742; /* Color of the handle when pressed */
-    border: 1px solid #3498db; /* Border of the handle when pressed */
-}
-</string>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-            </widget>
-           </item>
-           <item>
             <widget class="PlotWidget" name="graph2" native="true"/>
            </item>
           </layout>
-         </item>
-         <item>
-          <widget class="QSlider" name="horizontalSliderGraph2">
-           <property name="styleSheet">
-            <string notr="true">/* Style for the QSlider */
-
-/* Background of the slider track */
-QSlider {
-    background-color: transparent;
-    height: 10px; /* Set the height of the track */
-
-}
-
-/* Style for the groove (track) */
-QSlider::groove {
-    background: #595a5c; /* Color of the track */
-    border: 0px solid #999; /* Border of the track */
-    height: 5px; /* Set the height of the track */
-    border-radius: 2px; /* Round the corners of the track */
-}
-
-/* Style for the slider handle (thumb) */
-QSlider::handle {
-    background: #FF4742; /* Color of the handle */
-    border: 1px solid ; /* Border of the handle */
-    width: 20px; /* Width of the handle */
-    height: 30px; /* Height of the handle */
-    margin: -5px 0; /* Negative margin to center the handle vertically */
-    border-radius: 2px; /* Round the corners of the handle */
-}
-
-/* Style for the slider handle when pressed */
-QSlider::handle:pressed {
-    background: #FF4742; /* Color of the handle when pressed */
-    border: 1px solid #3498db; /* Border of the handle when pressed */
-}
-</string>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -1938,7 +1788,7 @@ QSlider::handle:pressed {
      <x>0</x>
      <y>0</y>
      <width>1328</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

@@ -11,6 +11,7 @@ from fpdf import FPDF
 from pyqtgraph.exporters import ImageExporter
 import os
 
+
 class MainWindow(QtWidgets.QMainWindow):
 
     def __init__(self, *args, **kwargs):
@@ -84,56 +85,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.colorButtonGraph2.clicked.connect(self.change_plot_color_2)
 
-        # self.verticalSliderGraph2.setMinimum(0)
-        # self.verticalSliderGraph2.setMaximum(100)
-        # self.verticalSliderGraph2.setSingleStep(5)
-        # self.verticalSliderGraph2.setValue(self.data_index)
-        # self.verticalSliderGraph2.valueChanged.connect(self.change_speed)
-
-        # self.verticalSliderGraph1.setMinimum(0)
-        # self.verticalSliderGraph1.setMaximum(100)
-        # self.verticalSliderGraph1.setSingleStep(5)
-        # self.verticalSliderGraph1.setValue(self.data_index)
-        # self.verticalSliderGraph1.valueChanged.connect(self.change_speed)
-
-        # self.horizontalSliderGraph1.setMinimum(0)
-        # self.horizontalSliderGraph1.setMaximum(100)
-        # self.horizontalSliderGraph1.setSingleStep(5)
-        # self.horizontalSliderGraph1.setValue(self.data_index)
-        # self.horizontalSliderGraph1.valueChanged.connect(self.change_speed)
-
-        # self.horizontalSliderGraph2.setMinimum(0)
-        # self.horizontalSliderGraph2.setMaximum(100)
-        # self.horizontalSliderGraph2.setSingleStep(5)
-        # self.horizontalSliderGraph2.setValue(self.data_index)
-        # self.horizontalSliderGraph2.valueChanged.connect(self.change_speed)
-
-        # Connect the sceneClicked signal to the custom function
-        # self.graph1.scene().sigMouseClicked.connect(self.mouse_clicked)
-
-        # self.graph2.scene().sigMouseClicked.connect(self.mouse_clicked)
-
         self.graphSelection.currentIndexChanged.connect(
             self.update_selected_graph)
-        # self.update_selected_graph(self.graphSelection.currentIndex())
-
-    # def mouse_clicked(self, event):
-    #     # Get the coordinates of the clicked point
-    #     pos = event.pos()
-    #     # Map the pixel coordinates to view coordinates
-    #     view_pos = self.graph1.plotItem.vb.mapSceneToView(pos)
-    #     # Extract x and y coordinates
-    #     x, y = view_pos.x(), view_pos.y()
-
-    #     # Check if the clicked point is within the visible axis range
-    #     x_min, x_max, y_min, y_max = self.graph1.viewRange()
-
-    #     if x_min <= x <= x_max and y_min <= y <= y_max:
-    #         # Perform zoom operations only if the clicked point is within the visible axis range
-    #         # Implement this function similarly to the previous example
-    #         self.zoom_in(x, y)
-    #         # OR
-    #         # self.zoom_out(x, y)  # If you want to zoom out, implement the zoom_out function
 
     def change_speed(self):
         self.data_index = self.speedSlider.value()
@@ -538,11 +491,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
             pdf.cell(200, 10, text="Graph Snapshot")
             pdf.ln(10)  # Move to the next line
-            
+
             graph_image = self.capture_graph_snapshot(graph_widget)
             pdf.image(graph_image, x=10, w=190)
             pdf.ln(10)  # Move to the next line
-            
+
             pdf.cell(200, 10, text="Statistics")
             pdf.ln(10)  # Move to the next line
 
@@ -555,31 +508,32 @@ class MainWindow(QtWidgets.QMainWindow):
             for key, value in self.lookup.items():
                 if value == graph_widget:
                     graph_name = key
-            mean, std, maximum, minimum = self.get_signal_statistics(graph_name)
+            mean, std, maximum, minimum = self.get_signal_statistics(
+                graph_name)
             # Fill the table with statistics
             pdf.cell(col_width, 10, "Mean", border=1)
-            pdf.cell(col_width, 10, f"{mean:.6f}", border=1)
+            pdf.cell(col_width, 10, f"{mean: .6f}", border=1)
             pdf.ln()
 
             pdf.cell(col_width, 10, "Standard Deviation", border=1)
-            pdf.cell(col_width, 10, f"{std:.6f}", border=1)
+            pdf.cell(col_width, 10, f"{std: .6f}", border=1)
             pdf.ln()
 
             pdf.cell(col_width, 10, "Maximum", border=1)
-            pdf.cell(col_width, 10, f"{maximum:.6f}", border=1)
+            pdf.cell(col_width, 10, f"{maximum: .6f}", border=1)
             pdf.ln()
 
             pdf.cell(col_width, 10, "Minimum", border=1)
-            pdf.cell(col_width, 10, f"{minimum:.6f}", border=1)
+            pdf.cell(col_width, 10, f"{minimum: .6f}", border=1)
             pdf.ln()
-        
+
         pdf.output(str(FolderPath[0]))
         # This message appears when the pdf EXPORTED
         QtWidgets.QMessageBox.information(
             self, 'Done', 'PDF has been created')
-        
+
         os.remove("graph_snapshot.png")
-        
+
     def capture_graph_snapshot(self, graph_widget):
         # Create an ImageExporter to export the plot as an image
         exporter = ImageExporter(graph_widget.plotItem)
@@ -591,11 +545,11 @@ class MainWindow(QtWidgets.QMainWindow):
         exporter.export(export_file)
         return export_file
 
-    def get_signal_statistics(self, graph_widget:str):
+    def get_signal_statistics(self, graph_widget: str):
         time, data = self.signals[graph_widget][0][0]
         # data_item = graph_widget.getPlotItem().listDataItems()[0]
-        #x_data, data = data_item.xData, data_item.yData
-        mean =  np.mean(data)
+        # x_data, data = data_item.xData, data_item.yData
+        mean = np.mean(data)
         std = np.std(data)
         maximum = np.max(data)
         minimum = np.min(data)

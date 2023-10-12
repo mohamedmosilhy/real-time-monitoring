@@ -21,6 +21,9 @@ class MainWindow(QtWidgets.QMainWindow):
         # "graph1":[[(time,data),end_index]] Each list in the nested lists represent a signal
         # contain the line plots for each graph ordered by insertion
         self.signals_lines = {"graph1": [], "graph2": []}
+
+        self.signals_visibility = {"graph1": [], "graph2": []}
+
         self.data_index = 10
         self.sourceGraph = "both"  # flag for link mode
 
@@ -42,6 +45,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.current_graph = self.graph1  # default value
         self.current_graph.clear()
 
+        # to know the what the channels i selected in each combobox , None will be int
+        self.channels_selected = {"graph1": None, "graph2": None}
+
         self.graph1.setLabel("bottom", "Time")
         self.graph1.setLabel("left", "Amplitude")
         self.graph2.setLabel("bottom", "Time")
@@ -50,12 +56,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.graph2.showGrid(x=True, y=True)
 
         self.timer.timeout.connect(self.update_plot_data)
+
         self.importButton.clicked.connect(self.browse)
 
         self.reportButton.clicked.connect(self.generate_signal_report)
-        # self.graphSelection.currentIndexChanged.connect(self.index_changed)
 
-        # self.graph_selected_index = self.graphSelection.currentIndex()
+        self.channelsGraph1.addItem("All Channels")
+        self.channelsGraph2.addItem("All Channels")
 
         self.playButton.clicked.connect(self.toggle_play_pause)
 
@@ -87,6 +94,34 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.graphSelection.currentIndexChanged.connect(
             self.update_selected_graph)
+
+        self.channelsGraph1.currentIndexChanged.connect(
+            lambda i, graph="graph1": self.change_index(graph, i))
+
+        self.channelsGraph2.currentIndexChanged.connect(
+            lambda i, graph="graph2": self.change_index(graph, i))
+
+        self.channelsGraph1.currentIndexChanged.connect(lambda i, graph="graph1":
+                                                        self.handle_selected_channels_change(graph, i))
+
+        self.channelsGraph2.currentIndexChanged.connect(lambda i, graph="graph1":
+                                                        self.handle_selected_channels_change(graph, i))
+
+    def handle_selected_channels_change(self, graph, i):
+        if self.channels_selected[graph] == 0:
+            for i in range(len(self.signals_lines[graph])):
+                self.signals_visibility[graph][i] = True
+        else:
+            selected_channel_index = self.channels_selected[graph] - 1
+
+            for i in range(len(self.signals_lines[graph])):
+                if i == selected_channel_index:
+                    self.signals_visibility[graph][i] = True
+                else:
+                    self.signals_visibility[graph][i] = False
+
+    def change_index(self, graph, i):
+        self.channels_selected[graph] = i
 
     def change_speed(self):
         self.data_index = self.speedSlider.value()
@@ -184,9 +219,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.graph1_signals_paths = []
             self.graph2_signals_paths = []
 
-    def index_changed(self, i):
-        self.graph_selected_index = i
-
     def link_graphs(self):
         self.update_selected_graph(2)
         self.graphSelection.setCurrentIndex(2)
@@ -202,13 +234,25 @@ class MainWindow(QtWidgets.QMainWindow):
         if self.current_graph == self.graph1:
 
             self.graph1_signals_paths.append(self.file_path)
+            self.channelsGraph1.addItem(
+                f"Channel{len(self.signals["graph1"]) + 1}")
+            self.signals_visibility["graph1"].append(True)
 
         elif self.current_graph == self.graph2:
 
             self.graph2_signals_paths.append(self.file_path)
+            self.channelsGraph2.addItem(
+                f"Channel{len(self.signals["graph2"]) + 1}")
+            self.signals_visibility["graph2"].append(True)
         else:
             self.graph1_signals_paths.append(self.file_path)
             self.graph2_signals_paths.append(self.file_path)
+            self.channelsGraph1.addItem(
+                f"Channel{len(self.signals["graph1"]) + 1}")
+            self.channelsGraph1.addItem(
+                f"Channel{len(self.signals["graph2"]) + 1}")
+            self.signals_visibility["graph1"].append(True)
+            self.signals_visibility["graph2"].append(True)
 
         if self.file_path:
             self.open_file(self.file_path)
@@ -395,7 +439,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def updating_graphs(self, graph: str):
         for i, signal in enumerate(self.signals[graph]):
             (time, data), end_ind = signal
-            # print(self.signals_lines[graph])
+
             signal_line = self.signals_lines[graph][i]
             self.X = time[:end_ind + self.data_index]
             self.Y = data[:end_ind + self.data_index]
@@ -405,7 +449,11 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.lookup[graph].setXRange(0, 1)
             else:
                 self.lookup[graph].setXRange(self.X[-1] - 1, self.X[-1])
-            signal_line.setData(self.X, self.Y)
+
+            if self.signals_visibility[graph][i]:
+                signal_line.setData(self.X, self.Y, visible=True)
+            else:
+                signal_line.setData([], [], visible=False)
 
     def get_graph_name(self):
         if self.current_graph == self.graph1:
@@ -460,7 +508,7 @@ class MainWindow(QtWidgets.QMainWindow):
             pen = pg.mkPen(color=rgb)
 
             # Apply the new color to the current plot
-            for curve in self.signals_lines[self.current_signal_info[0]]:
+            for curve in self.signals_lines[self.get_graph_name()]:
                 curve.setPen(pen)
 
     def change_plot_color_2(self):
@@ -475,7 +523,7 @@ class MainWindow(QtWidgets.QMainWindow):
             pen = pg.mkPen(color=rgb)
 
             # Apply the new color to the current plot
-            for curve in self.signals_lines[self.current_signal_info[0]]:
+            for curve in self.signals_lines[self.get_graph_name()]:
                 curve.setPen(pen)
 
     def create_report(self, graph_widget, pdf_title="Signal_Report.pdf"):

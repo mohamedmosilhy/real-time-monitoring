@@ -445,10 +445,11 @@ class MainWindow(QtWidgets.QMainWindow):
             self.Y = data[:end_ind + self.data_index]
             self.signals[graph][i] = [
                 (time, data), end_ind + self.data_index]
-            if (self.X[-1] < 1):
-                self.lookup[graph].setXRange(0, 1)
+            if (self.X[-1] < time[-1] / 5):
+                self.lookup[graph].setXRange(0, time[-1] / 5)
             else:
-                self.lookup[graph].setXRange(self.X[-1] - 1, self.X[-1])
+                self.lookup[graph].setXRange(
+                    self.X[-1] - time[-1] / 5, self.X[-1])
 
             if self.signals_visibility[graph][i]:
                 signal_line.setData(self.X, self.Y, visible=True)

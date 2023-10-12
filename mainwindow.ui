@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1314</width>
+    <width>1328</width>
     <height>826</height>
    </rect>
   </property>
@@ -50,7 +50,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">
+          <string notr="true">QPushButton{
   appearance: button;
   backface-visibility: hidden;
   background-color: #405cf5;
@@ -75,7 +75,13 @@
   transition: all .2s,box-shadow .08s ease-in;
   touch-action: manipulation;
   width: 100%;
-
+}
+QPushButton:hover{
+background-color: #283999;
+}
+QPushButton:pressed{
+background-color: #1c2973;
+}
 </string>
          </property>
          <property name="text">
@@ -103,7 +109,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">
+          <string notr="true">QPushButton{
   appearance: button;
   backface-visibility: hidden;
   background-color: #405cf5;
@@ -130,6 +136,13 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   width: 100%;
+}
+QPushButton:hover{
+background-color: #283999;
+}
+QPushButton:pressed{
+background-color: #1c2973;
+}
 
 </string>
          </property>
@@ -144,61 +157,6 @@
           <size>
            <width>25</width>
            <height>25</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="saveButton">
-         <property name="font">
-          <font>
-           <family>-apple-system</family>
-           <pointsize>-1</pointsize>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">
-  appearance: button;
-  backface-visibility: hidden;
-  background-color: #405cf5;
-  border-radius: 6px;
-  border-width: 0;
-  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
-  font-size: 17px;
-  height: 44px;
-  line-height: 1.15;
-  margin: 12px 0 0;
-  outline: none;
-  overflow: hidden;
-  padding: 0 10px;
-  position: relative;
-  text-align: center;
-  text-transform: none;
-  transform: translateZ(0);
-  transition: all .2s,box-shadow .08s ease-in;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  width: 100%;
-
-</string>
-         </property>
-         <property name="text">
-          <string>Save</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>Icons/save.png</normaloff>Icons/save.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>40</width>
-           <height>40</height>
           </size>
          </property>
         </widget>
@@ -360,14 +318,15 @@ QSlider::handle:vertical:pressed {
 QSlider {
     background-color: transparent;
     height: 10px; /* Set the height of the track */
+
 }
 
 /* Style for the groove (track) */
 QSlider::groove {
-    background: #fff; /* Color of the track */
-    border: 1px solid #999; /* Border of the track */
-    height: 10px; /* Set the height of the track */
-    border-radius: 5px; /* Round the corners of the track */
+    background: #595a5c; /* Color of the track */
+    border: 0px solid #999; /* Border of the track */
+    height: 5px; /* Set the height of the track */
+    border-radius: 2px; /* Round the corners of the track */
 }
 
 /* Style for the slider handle (thumb) */
@@ -377,7 +336,7 @@ QSlider::handle {
     width: 20px; /* Width of the handle */
     height: 30px; /* Height of the handle */
     margin: -5px 0; /* Negative margin to center the handle vertically */
-    border-radius: 10px; /* Round the corners of the handle */
+    border-radius: 2px; /* Round the corners of the handle */
 }
 
 /* Style for the slider handle when pressed */
@@ -539,7 +498,8 @@ color: #fff;</string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">appearance: button;
+              <string notr="true">QPushButton{
+appearance: button;
 backface-visibility: hidden;
 background-color: #405cf5;
 border-radius: 6px;
@@ -564,7 +524,13 @@ user-select: none;
 -webkit-user-select: none;
 touch-action: manipulation;
 width: 100%; /* Reduced width to 200 pixels */
-</string>
+}
+QPushButton:hover{
+background-color: #283999;
+}
+QPushButton:pressed{
+background-color: #1c2973;
+}</string>
              </property>
              <property name="text">
               <string>Delete</string>
@@ -612,7 +578,8 @@ width: 100%; /* Reduced width to 200 pixels */
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">appearance: button;
+              <string notr="true">QPushButton{
+appearance: button;
 backface-visibility: hidden;
 background-color: #405cf5;
 border-radius: 6px;
@@ -638,7 +605,13 @@ user-select: none;
 -webkit-user-select: none;
 touch-action: manipulation;
 width: 100%; /* Reduced width to 200 pixels */
-</string>
+}
+QPushButton:hover{
+background-color: #283999;
+}
+QPushButton:pressed{
+background-color: #1c2973;
+}</string>
              </property>
              <property name="text">
               <string> Color</string>
@@ -773,7 +746,7 @@ QCheckBox::indicator::checked {
             <bool>true</bool>
            </property>
            <property name="styleSheet">
-            <string notr="true">
+            <string notr="true">QPushButton{
   background: #FF4742;
   border-radius: 10px;
   box-shadow: #5E5DF0 0 10px 20px -10px;
@@ -785,12 +758,16 @@ QCheckBox::indicator::checked {
   font-weight: 800;
   line-height: 24px;
   opacity: 1;
-
   padding: 5px 10px;
   touch-action: manipulation;
-  width: 60px;
-
-</string>
+  width: 20px;
+}
+QPushButton:hover{
+background-color: #cc3834;
+}
+QPushButton:pressed{
+background-color: #992a27;
+}</string>
            </property>
            <property name="text">
             <string>Link</string>
@@ -901,14 +878,15 @@ QSlider::handle:vertical:pressed {
 QSlider {
     background-color: transparent;
     height: 10px; /* Set the height of the track */
+
 }
 
 /* Style for the groove (track) */
 QSlider::groove {
-    background: #fff; /* Color of the track */
-    border: 1px solid #999; /* Border of the track */
-    height: 10px; /* Set the height of the track */
-    border-radius: 5px; /* Round the corners of the track */
+    background: #595a5c; /* Color of the track */
+    border: 0px solid #999; /* Border of the track */
+    height: 5px; /* Set the height of the track */
+    border-radius: 2px; /* Round the corners of the track */
 }
 
 /* Style for the slider handle (thumb) */
@@ -918,7 +896,7 @@ QSlider::handle {
     width: 20px; /* Width of the handle */
     height: 30px; /* Height of the handle */
     margin: -5px 0; /* Negative margin to center the handle vertically */
-    border-radius: 10px; /* Round the corners of the handle */
+    border-radius: 2px; /* Round the corners of the handle */
 }
 
 /* Style for the slider handle when pressed */
@@ -1068,7 +1046,8 @@ color: #fff;</string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">appearance: button;
+              <string notr="true">QPushButton{
+appearance: button;
 backface-visibility: hidden;
 background-color: #405cf5;
 border-radius: 6px;
@@ -1093,7 +1072,13 @@ user-select: none;
 -webkit-user-select: none;
 touch-action: manipulation;
 width: 100%; /* Reduced width to 200 pixels */
-</string>
+}
+QPushButton:hover{
+background-color: #283999;
+}
+QPushButton:pressed{
+background-color: #1c2973;
+}</string>
              </property>
              <property name="text">
               <string>Delete</string>
@@ -1120,7 +1105,8 @@ width: 100%; /* Reduced width to 200 pixels */
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">appearance: button;
+              <string notr="true">QPushButton{
+appearance: button;
 backface-visibility: hidden;
 background-color: #405cf5;
 border-radius: 6px;
@@ -1145,7 +1131,13 @@ user-select: none;
 -webkit-user-select: none;
 touch-action: manipulation;
 width: 100%; /* Reduced width to 200 pixels */
-</string>
+}
+QPushButton:hover{
+background-color: #283999;
+}
+QPushButton:pressed{
+background-color: #1c2973;
+}</string>
              </property>
              <property name="text">
               <string> Color</string>
@@ -1311,8 +1303,7 @@ color: #fff;</string>
          <item>
           <widget class="QComboBox" name="graphSelection">
            <property name="styleSheet">
-            <string notr="true">/* QComboBox style */
-
+            <string notr="true">
 .QComboBox {
   /* Set the width of the combo box */
   width: 20px;
@@ -1471,7 +1462,7 @@ color: #fff;</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">
+          <string notr="true">QPushButton{
   appearance: button;
   backface-visibility: hidden;
   background-color: #405cf5;
@@ -1498,8 +1489,13 @@ color: #fff;</string>
   -webkit-user-select: none;
   touch-action: manipulation;
   width: 100%;
-
-</string>
+}
+QPushButton:hover{
+background-color: #283999;
+}
+QPushButton:pressed{
+background-color: #1c2973;
+}</string>
          </property>
          <property name="text">
           <string>Play</string>
@@ -1526,7 +1522,7 @@ color: #fff;</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">
+          <string notr="true">QPushButton{
   appearance: button;
   backface-visibility: hidden;
   background-color: #405cf5;
@@ -1553,8 +1549,13 @@ color: #fff;</string>
   -webkit-user-select: none;
   touch-action: manipulation;
   width: 100%;
-
-</string>
+}
+QPushButton:hover{
+background-color: #283999;
+}
+QPushButton:pressed{
+background-color: #1c2973;
+}</string>
          </property>
          <property name="text">
           <string>Rewind</string>
@@ -1581,7 +1582,7 @@ color: #fff;</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">
+          <string notr="true">QPushButton{
   appearance: button;
   backface-visibility: hidden;
   background-color: #405cf5;
@@ -1608,8 +1609,13 @@ color: #fff;</string>
   -webkit-user-select: none;
   touch-action: manipulation;
   width: 100%;
-
-</string>
+}
+QPushButton:hover{
+background-color: #283999;
+}
+QPushButton:pressed{
+background-color: #1c2973;
+}</string>
          </property>
          <property name="text">
           <string>Clear</string>
@@ -1617,6 +1623,62 @@ color: #fff;</string>
          <property name="icon">
           <iconset>
            <normaloff>Icons/clear-svgrepo-com.svg</normaloff>Icons/clear-svgrepo-com.svg</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="clearButton_2">
+         <property name="font">
+          <font>
+           <family>-apple-system</family>
+           <pointsize>14</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
+  font-size: 100%;
+  height: 44px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+}
+QPushButton:hover{
+background-color: #283999;
+}
+QPushButton:pressed{
+background-color: #1c2973;
+}</string>
+         </property>
+         <property name="text">
+          <string>Snapshoot</string>
          </property>
          <property name="iconSize">
           <size>
@@ -1670,7 +1732,7 @@ color: #fff;</string>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">
+            <string notr="true">QPushButton{
   appearance: button;
   backface-visibility: hidden;
   background-color: #405cf5;
@@ -1697,8 +1759,13 @@ color: #fff;</string>
   -webkit-user-select: none;
   touch-action: manipulation;
   width: 100%;
-
-</string>
+}
+QPushButton:hover{
+background-color: #283999;
+}
+QPushButton:pressed{
+background-color: #1c2973;
+}</string>
            </property>
            <property name="text">
             <string>Zoom In</string>
@@ -1728,7 +1795,7 @@ color: #fff;</string>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">
+            <string notr="true">QPushButton{
   appearance: button;
   backface-visibility: hidden;
   background-color: #405cf5;
@@ -1755,8 +1822,13 @@ color: #fff;</string>
   -webkit-user-select: none;
   touch-action: manipulation;
   width: 100%;
-
-</string>
+}
+QPushButton:hover{
+background-color: #283999;
+}
+QPushButton:pressed{
+background-color: #1c2973;
+}</string>
            </property>
            <property name="text">
             <string>Zoom Out</string>
@@ -1812,10 +1884,10 @@ QSlider {
 
 /* Style for the groove (track) */
 QSlider::groove {
-    background: #fff; /* Color of the track */
-    border: 1px solid #999; /* Border of the track */
-    height: 10px; /* Set the height of the track */
-    border-radius: 5px; /* Round the corners of the track */
+    background: #595a5c; /* Color of the track */
+    border: 0px solid #999; /* Border of the track */
+    height: 5px; /* Set the height of the track */
+    border-radius: 2px; /* Round the corners of the track */
 }
 
 /* Style for the slider handle (thumb) */
@@ -1825,7 +1897,7 @@ QSlider::handle {
     width: 20px; /* Width of the handle */
     height: 30px; /* Height of the handle */
     margin: -5px 0; /* Negative margin to center the handle vertically */
-    border-radius: 10px; /* Round the corners of the handle */
+    border-radius: 2px; /* Round the corners of the handle */
 }
 
 /* Style for the slider handle when pressed */
@@ -1865,8 +1937,8 @@ QSlider::handle:pressed {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1314</width>
-     <height>26</height>
+     <width>1328</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>

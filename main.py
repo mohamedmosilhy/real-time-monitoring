@@ -1,14 +1,15 @@
-from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QFileDialog, QDialog, QApplication, QMainWindow, QMessageBox, QColorDialog
+from PyQt6 import QtCore, QtWidgets
+from PyQt6.QtWidgets import QFileDialog
 import wfdb
 import numpy as np
 import sys
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from pyqtgraph.Qt import QtCore
 from PyQt6 import QtWidgets, uic
 import pyqtgraph as pg
 import csv
-
+from fpdf import FPDF
+from pyqtgraph.exporters import ImageExporter
+import os
 
 class MainWindow(QtWidgets.QMainWindow):
 
@@ -50,6 +51,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.timer.timeout.connect(self.update_plot_data)
         self.importButton.clicked.connect(self.browse)
 
+        self.reportButton.clicked.connect(self.generate_signal_report)
         # self.graphSelection.currentIndexChanged.connect(self.index_changed)
 
         # self.graph_selected_index = self.graphSelection.currentIndex()
@@ -423,7 +425,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 self.is_playing[1]["is_playing"] = True
                 self.playButton.setText('Pause')
-        else:
+        else:  # link mode
             for graph in self.is_playing:
                 if graph["is_playing"]:
                     graph["is_playing"] = False
@@ -440,12 +442,16 @@ class MainWindow(QtWidgets.QMainWindow):
     def updating_graphs(self, graph: str):
         for i, signal in enumerate(self.signals[graph]):
             (time, data), end_ind = signal
-
-            signal_line = self.signals_lines[graph][i]  # error
+            # print(self.signals_lines[graph])
+            signal_line = self.signals_lines[graph][i]
             self.X = time[:end_ind + self.data_index]
             self.Y = data[:end_ind + self.data_index]
             self.signals[graph][i] = [
                 (time, data), end_ind + self.data_index]
+            if (self.X[-1] < 1):
+                self.lookup[graph].setXRange(0, 1)
+            else:
+                self.lookup[graph].setXRange(self.X[-1] - 1, self.X[-1])
             signal_line.setData(self.X, self.Y)
 
     def get_graph_name(self):
@@ -518,6 +524,85 @@ class MainWindow(QtWidgets.QMainWindow):
             # Apply the new color to the current plot
             for curve in self.signals_lines[self.current_signal_info[0]]:
                 curve.setPen(pen)
+
+    def create_report(self, graph_widget, pdf_title="Signal_Report.pdf"):
+        FolderPath = QFileDialog.getSaveFileName(
+            None, str('Save the signal file'), None, str("PDF FIles(*.pdf)"))
+        if FolderPath != '':
+            self.toggle_play_pause()
+            pdf = FPDF()
+            pdf.add_page()
+            pdf.set_font("helvetica", size=12)
+            pdf.cell(200, 10, text="Signal Report", align="C")
+            pdf.ln(10)  # Move to the next line
+
+            pdf.cell(200, 10, text="Graph Snapshot")
+            pdf.ln(10)  # Move to the next line
+            
+            graph_image = self.capture_graph_snapshot(graph_widget)
+            pdf.image(graph_image, x=10, w=190)
+            pdf.ln(10)  # Move to the next line
+            
+            pdf.cell(200, 10, text="Statistics")
+            pdf.ln(10)  # Move to the next line
+
+            # Define table columns
+            col_width = 45
+            pdf.cell(col_width, 10, "Metric", border=1, fill=True)
+            pdf.cell(col_width, 10, "Value", border=1, fill=True)
+            pdf.ln()
+            graph_name = ""
+            for key, value in self.lookup.items():
+                if value == graph_widget:
+                    graph_name = key
+            mean, std, maximum, minimum = self.get_signal_statistics(graph_name)
+            # Fill the table with statistics
+            pdf.cell(col_width, 10, "Mean", border=1)
+            pdf.cell(col_width, 10, f"{mean:.6f}", border=1)
+            pdf.ln()
+
+            pdf.cell(col_width, 10, "Standard Deviation", border=1)
+            pdf.cell(col_width, 10, f"{std:.6f}", border=1)
+            pdf.ln()
+
+            pdf.cell(col_width, 10, "Maximum", border=1)
+            pdf.cell(col_width, 10, f"{maximum:.6f}", border=1)
+            pdf.ln()
+
+            pdf.cell(col_width, 10, "Minimum", border=1)
+            pdf.cell(col_width, 10, f"{minimum:.6f}", border=1)
+            pdf.ln()
+        
+        pdf.output(str(FolderPath[0]))
+        # This message appears when the pdf EXPORTED
+        QtWidgets.QMessageBox.information(
+            self, 'Done', 'PDF has been created')
+        
+        os.remove("graph_snapshot.png")
+        
+    def capture_graph_snapshot(self, graph_widget):
+        # Create an ImageExporter to export the plot as an image
+        exporter = ImageExporter(graph_widget.plotItem)
+        # Set options for the exported image if needed
+        exporter.parameters()['width'] = 800
+        exporter.parameters()['height'] = 600
+        # Export the plot as a file
+        export_file = "graph_snapshot.png"
+        exporter.export(export_file)
+        return export_file
+
+    def get_signal_statistics(self, graph_widget:str):
+        time, data = self.signals[graph_widget][0][0]
+        # data_item = graph_widget.getPlotItem().listDataItems()[0]
+        #x_data, data = data_item.xData, data_item.yData
+        mean =  np.mean(data)
+        std = np.std(data)
+        maximum = np.max(data)
+        minimum = np.min(data)
+        return mean, std, maximum, minimum
+
+    def generate_signal_report(self):
+        self.create_report(self.current_graph)
 
 
 def main():

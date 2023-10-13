@@ -591,7 +591,7 @@ QCheckBox::indicator::checked {
 </string>
              </property>
              <property name="text">
-              <string>Visability</string>
+              <string>Invisability</string>
              </property>
             </widget>
            </item>
@@ -1788,7 +1788,7 @@ QSlider::handle:pressed {
      <x>0</x>
      <y>0</y>
      <width>1328</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

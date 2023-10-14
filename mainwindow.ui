@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1328</width>
+    <width>1337</width>
     <height>826</height>
    </rect>
   </property>
@@ -522,7 +522,7 @@ background-color: #1c2973;
               <string>Transfer</string>
              </property>
              <property name="icon">
-              <iconset resource="resourrces.qrc">
+              <iconset>
                <normaloff>:/Icons/Icons/transfer-vertical-svgrepo-com.svg</normaloff>:/Icons/Icons/transfer-vertical-svgrepo-com.svg</iconset>
              </property>
              <property name="iconSize">
@@ -615,44 +615,74 @@ background-color: #1c2973;
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="visabilityGraph1">
+            <widget class="QPushButton" name="hideButtonGraph1">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>-apple-system</family>
+               <pointsize>14</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
              <property name="styleSheet">
-              <string notr="true">
-/* Hide the default checkbox */
-QCheckBox::indicator {
-	font-family: 'Gabarito', cursive;
-    width: 20px;
-    height: 20px;
-    background-color: #fff; /* Background color of the checkbox */
-    border: 2px solid #3498db; /* Border color of the checkbox */
-    border-radius: 5px; /* Rounded corners */
-}
-
-/* Define the checkbox color when checked */
-QCheckBox::indicator:checked {
-    background-color: #2ecc71; /* Checkbox color when checked */
-    border-color: #27ae60; /* Border color when checked */
-}
-
-/* Define the checkbox hover effect */
-QCheckBox::indicator:hover {
-    background-color: #3498db; /* Hover color */
-}
-
-/* Define the checkbox text color */
-QCheckBox {
+              <string notr="true">QPushButton{
+appearance: button;
+backface-visibility: hidden;
+background-color: #405cf5;
+border-radius: 6px;
+border-width: 0;
+box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+box-sizing: border-box;
 color: #fff;
+cursor: pointer;
+font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
+font-size: 100%;
+height: 30px;
+line-height: 1.15;
+margin: 0 0 0;
+outline: none;
+overflow: hidden;
+padding: 3 8px;
+position: relative;
+text-align: center;
+text-transform: none;
+transform: translateZ(0);
+transition: all .2s,box-shadow .08s ease-in;
+user-select: none;
+-webkit-user-select: none;
+touch-action: manipulation;
+width: 20px; /* Reduced width to 200 pixels */
 }
-
-/* Define the spacing between the checkbox and label */
-QCheckBox::indicator::unchecked,
-QCheckBox::indicator::checked {
-    spacing: 10px;
+QPushButton:hover{
+background-color: #283999;
 }
-</string>
+QPushButton:pressed{
+background-color: #1c2973;
+}</string>
              </property>
              <property name="text">
-              <string>Hide</string>
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="resourrces.qrc">
+               <normaloff>:/Icons/Icons/hide-svgrepo-com.svg</normaloff>:/Icons/Icons/hide-svgrepo-com.svg</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>22</width>
+               <height>22</height>
+              </size>
              </property>
             </widget>
            </item>
@@ -662,7 +692,7 @@ QCheckBox::indicator::checked {
               <string notr="true">  position: relative;
   display: inline-block;
   height: 32px;
-  width: 240px;
+  width: 210px;
   margin: 0;
   padding: 0;
   background-color: #fff;
@@ -1035,7 +1065,7 @@ background-color: #1c2973;
               <string>Transfer</string>
              </property>
              <property name="icon">
-              <iconset resource="resourrces.qrc">
+              <iconset>
                <normaloff>:/Icons/Icons/transfer-vertical-svgrepo-com.svg</normaloff>:/Icons/Icons/transfer-vertical-svgrepo-com.svg</iconset>
              </property>
              <property name="iconSize">
@@ -1106,44 +1136,74 @@ background-color: #1c2973;
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="visabilityGraph2">
+            <widget class="QPushButton" name="hideButtonGraph2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>-apple-system</family>
+               <pointsize>14</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
              <property name="styleSheet">
-              <string notr="true">/* Hide the default checkbox */
-QCheckBox::indicator {
-    width: 20px;
-    height: 20px;
-    background-color: #fff; /* Background color of the checkbox */
-    border: 2px solid #3498db; /* Border color of the checkbox */
-    border-radius: 5px; /* Rounded corners */
+              <string notr="true">QPushButton{
+appearance: button;
+backface-visibility: hidden;
+background-color: #405cf5;
+border-radius: 6px;
+border-width: 0;
+box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+box-sizing: border-box;
+color: #fff;
+cursor: pointer;
+font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
+font-size: 100%;
+height: 30px;
+line-height: 1.15;
+margin: 0 0 0;
+outline: none;
+overflow: hidden;
+padding: 3 8px;
+position: relative;
+text-align: center;
+text-transform: none;
+transform: translateZ(0);
+transition: all .2s,box-shadow .08s ease-in;
+user-select: none;
+-webkit-user-select: none;
+touch-action: manipulation;
+width: 20px; /* Reduced width to 200 pixels */
 }
-
-/* Define the checkbox color when checked */
-QCheckBox::indicator:checked {
-    background-color: #2ecc71; /* Checkbox color when checked */
-    border-color: #27ae60; /* Border color when checked */
-
+QPushButton:hover{
+background-color: #283999;
 }
-
-/* Define the checkbox hover effect */
-QCheckBox::indicator:hover {
-    background-color: #3498db; /* Hover color */
-
-}
-
-/* Define the checkbox text color */
-QCheckBox {
-    color: #fff;
-}
-
-/* Define the spacing between the checkbox and label */
-QCheckBox::indicator::unchecked,
-QCheckBox::indicator::checked {
-    spacing: 10px;
-}
-</string>
+QPushButton:pressed{
+background-color: #1c2973;
+}</string>
              </property>
              <property name="text">
-              <string>Hide</string>
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="resourrces.qrc">
+               <normaloff>:/Icons/Icons/hide-svgrepo-com.svg</normaloff>:/Icons/Icons/hide-svgrepo-com.svg</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>22</width>
+               <height>22</height>
+              </size>
              </property>
             </widget>
            </item>
@@ -1153,7 +1213,7 @@ QCheckBox::indicator::checked {
               <string notr="true">  position: relative;
   display: inline-block;
   height: 32px;
-  width: 240px;
+  width: 210px;
   margin: 0;
   padding: 0;
   background-color: #fff;
@@ -1856,7 +1916,7 @@ QSlider::handle:pressed {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1328</width>
+     <width>1337</width>
      <height>22</height>
     </rect>
    </property>

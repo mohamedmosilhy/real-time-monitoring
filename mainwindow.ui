@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1337</width>
+    <width>1288</width>
     <height>826</height>
    </rect>
   </property>
@@ -191,6 +191,9 @@ background-color: #1c2973;
         </widget>
        </item>
        <item>
+        <widget class="QListWidget" name="hideList1"/>
+       </item>
+       <item>
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -202,6 +205,9 @@ background-color: #1c2973;
           </size>
          </property>
         </spacer>
+       </item>
+       <item>
+        <widget class="QListWidget" name="hideList2"/>
        </item>
       </layout>
      </widget>
@@ -277,7 +283,7 @@ color: #fff;</string>
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="0,0,0,0,0,0,0">
+          <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="0,0,0,0,0,0">
            <property name="spacing">
             <number>20</number>
            </property>
@@ -605,78 +611,6 @@ background-color: #1c2973;
              <property name="icon">
               <iconset>
                <normaloff>Icons/color-palette-svgrepo-com.svg</normaloff>Icons/color-palette-svgrepo-com.svg</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>22</width>
-               <height>22</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="hideButtonGraph1">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>-apple-system</family>
-               <pointsize>14</pointsize>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QPushButton{
-appearance: button;
-backface-visibility: hidden;
-background-color: #405cf5;
-border-radius: 6px;
-border-width: 0;
-box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
-box-sizing: border-box;
-color: #fff;
-cursor: pointer;
-font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
-font-size: 100%;
-height: 30px;
-line-height: 1.15;
-margin: 0 0 0;
-outline: none;
-overflow: hidden;
-padding: 3 8px;
-position: relative;
-text-align: center;
-text-transform: none;
-transform: translateZ(0);
-transition: all .2s,box-shadow .08s ease-in;
-user-select: none;
--webkit-user-select: none;
-touch-action: manipulation;
-width: 20px; /* Reduced width to 200 pixels */
-}
-QPushButton:hover{
-background-color: #283999;
-}
-QPushButton:pressed{
-background-color: #1c2973;
-}</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="resourrces.qrc">
-               <normaloff>:/Icons/Icons/hide-svgrepo-com.svg</normaloff>:/Icons/Icons/hide-svgrepo-com.svg</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -1018,7 +952,7 @@ background-color: #1c2973;
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="transferButtonGraph2_2">
+            <widget class="QPushButton" name="transferButtonGraph2_1">
              <property name="font">
               <font>
                <family>-apple-system</family>
@@ -1126,78 +1060,6 @@ background-color: #1c2973;
              <property name="icon">
               <iconset>
                <normaloff>Icons/color-palette-svgrepo-com.svg</normaloff>Icons/color-palette-svgrepo-com.svg</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>22</width>
-               <height>22</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="hideButtonGraph2">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>-apple-system</family>
-               <pointsize>14</pointsize>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QPushButton{
-appearance: button;
-backface-visibility: hidden;
-background-color: #405cf5;
-border-radius: 6px;
-border-width: 0;
-box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
-box-sizing: border-box;
-color: #fff;
-cursor: pointer;
-font-family: -apple-system,system-ui,&quot;Segoe UI&quot;,Roboto,&quot;Helvetica Neue&quot;,Ubuntu,sans-serif;
-font-size: 100%;
-height: 30px;
-line-height: 1.15;
-margin: 0 0 0;
-outline: none;
-overflow: hidden;
-padding: 3 8px;
-position: relative;
-text-align: center;
-text-transform: none;
-transform: translateZ(0);
-transition: all .2s,box-shadow .08s ease-in;
-user-select: none;
--webkit-user-select: none;
-touch-action: manipulation;
-width: 20px; /* Reduced width to 200 pixels */
-}
-QPushButton:hover{
-background-color: #283999;
-}
-QPushButton:pressed{
-background-color: #1c2973;
-}</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="resourrces.qrc">
-               <normaloff>:/Icons/Icons/hide-svgrepo-com.svg</normaloff>:/Icons/Icons/hide-svgrepo-com.svg</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -1916,7 +1778,7 @@ QSlider::handle:pressed {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1337</width>
+     <width>1288</width>
      <height>22</height>
     </rect>
    </property>

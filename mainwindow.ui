@@ -24,7 +24,7 @@
    <string notr="true">background-color: #242526;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0,5,0,1">
+   <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,5,0,1">
     <property name="leftMargin">
      <number>9</number>
     </property>
@@ -191,23 +191,82 @@ background-color: #1c2973;
         </widget>
        </item>
        <item>
-        <widget class="QListWidget" name="hideList1"/>
+        <widget class="QListWidget" name="hideList1">
+         <property name="styleSheet">
+          <string notr="true">QListWidget {
+    background-color: #4a4a4a; /* Background color of the list widget */
+    /*border: 1px solid #c0c0c0; /* Border color and width */
+    padding: 5px; /* Padding around the list items */
+	border-radius: 15px;
+}
+
+QListWidget::item {
+    background-color: #4a4a4a; /* Background color of each list item */
+    padding: 5px; /* Padding inside each list item */
+    border-bottom: 1px solid #c0c0c0; /* Separator between list items */
+    border-radius: 15px; /* Border radius for rounded corners */
+	color: #ffffff;
+}
+
+
+QListWidget::item:selected {
+    background-color: #3399ff; /* Background color of selected item */
+    color: #ffffff; /* Text color of selected item */
+}
+
+QListWidget::item:hover {
+    background-color: #e0e0e0; /* Background color when hovering over an item */
+}
+</string>
+         </property>
+        </widget>
        </item>
        <item>
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Maximum</enum>
+         </property>
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>40</height>
+           <height>180</height>
           </size>
          </property>
         </spacer>
        </item>
        <item>
-        <widget class="QListWidget" name="hideList2"/>
+        <widget class="QListWidget" name="hideList2">
+         <property name="styleSheet">
+          <string notr="true">QListWidget {
+    background-color: #4a4a4a; /* Background color of the list widget */
+    /*border: 1px solid #c0c0c0; /* Border color and width */
+    padding: 5px; /* Padding around the list items */
+	border-radius: 15px;
+}
+
+QListWidget::item {
+    background-color: #4a4a4a; /* Background color of each list item */
+    padding: 5px; /* Padding inside each list item */
+    border-bottom: 1px solid #c0c0c0; /* Separator between list items */
+    border-radius: 15px; /* Border radius for rounded corners */
+	color: #ffffff;
+}
+
+
+QListWidget::item:selected {
+    background-color: #3399ff; /* Background color of selected item */
+    color: #ffffff; /* Text color of selected item */
+}
+
+QListWidget::item:hover {
+    background-color: #e0e0e0; /* Background color when hovering over an item */
+}
+</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -529,7 +588,7 @@ background-color: #1c2973;
              </property>
              <property name="icon">
               <iconset>
-               <normaloff>:/Icons/Icons/transfer-vertical-svgrepo-com.svg</normaloff>:/Icons/Icons/transfer-vertical-svgrepo-com.svg</iconset>
+               <normaloff>Icons/transfer-vertical-svgrepo-com.svg</normaloff>Icons/transfer-vertical-svgrepo-com.svg</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -1000,7 +1059,7 @@ background-color: #1c2973;
              </property>
              <property name="icon">
               <iconset>
-               <normaloff>:/Icons/Icons/transfer-vertical-svgrepo-com.svg</normaloff>:/Icons/Icons/transfer-vertical-svgrepo-com.svg</iconset>
+               <normaloff>Icons/transfer-vertical-svgrepo-com.svg</normaloff>Icons/transfer-vertical-svgrepo-com.svg</iconset>
              </property>
              <property name="iconSize">
               <size>

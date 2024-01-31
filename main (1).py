@@ -13,7 +13,7 @@ import os
 import random
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QShortcut, QKeySequence, QIcon
-
+import qdarkstyle
 
 class MainWindow(QtWidgets.QMainWindow):
 
@@ -54,6 +54,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def init_ui(self):
         # Load the UI Page
         self.ui = uic.loadUi('mainwindow.ui', self)
+        self.setWindowTitle("Multi-Channel Signal Viewer")
+        self.setWindowIcon(QIcon("Icons\ECG.png"))
         self.lookup = {"graph1": self.graph1, "graph2": self.graph2}
         self.current_graph = self.graph1  # default value
         self.current_graph.clear()
@@ -1179,6 +1181,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.create_statistics_table(mean, std, maximum, minimum)
 
     def create_statistics_table(self, mean, std, maximum, minimum):
+        self.pdf.ln(10)  # Move to the next line
         col_width = 25
         num_plots = len(mean)
 
@@ -1243,6 +1246,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
+    app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt6())
     main = MainWindow()
     main.show()
     sys.exit(app.exec())
